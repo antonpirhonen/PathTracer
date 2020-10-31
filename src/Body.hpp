@@ -7,7 +7,8 @@ class Body {
 
     public:
 
-        Body(double gloss, Vec3 color_rem, double luminosity, Vec3 light_color) : gloss_(gloss), color_rem_(color_rem), luminosity_(luminosity), light_color_(light_color) { }
+        Body(double gloss, Vec3 color_rem, double luminosity, Vec3 light_color) 
+            : gloss_(gloss), color_rem_(color_rem), luminosity_(luminosity), light_color_(light_color) { }
 
         double gloss_;
         Vec3 color_rem_;
