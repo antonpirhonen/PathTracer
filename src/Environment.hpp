@@ -5,16 +5,16 @@ class Environment {
 
 public:
     Environment();
-    std::vector<Body> GetBodies();
-    bool AddBody(Body&);
-    void PrintInfo();
+    std::vector<Body> const GetBodies() const;
+    void AddBody(const Body&);
+    void PrintInfo() const;
     void SaveEnvironment(std::string);
     void LoadEnvironment(std::string);
     void LoadBodyFromFile(std::string);
 
 private:
     std::vector<Body> bodies_ = { };
-    float x_range [] = { };
-    float y_range [] = { };
-    float z_range [] = { };
+    std::pair<float, float> x_range_;
+    std::pair<float, float> y_range_;
+    std::pair<float, float> z_range_;
 };
