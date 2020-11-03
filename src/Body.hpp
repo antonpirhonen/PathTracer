@@ -19,30 +19,22 @@ Triangle point order? Is triangle normal calculated right?
 
 class Body {
 
-    public:
+public:
+    Body(double gloss, Vec3 color_rem, double luminosity, RGB_color light_color) 
+        : gloss_(gloss), color_rem_(color_rem), luminosity_(luminosity), light_color_(light_color) { }
+    
+    virtual ~Body() { }
+    virtual bool FindCollision(Ray &Ray) = 0;
 
-        Body(double gloss, Vec3 color_rem, double luminosity, RGB_color light_color) 
-            : gloss_(gloss), color_rem_(color_rem), luminosity_(luminosity), light_color_(light_color) { }
+private:
+    Vec3 color_rem_;
+    double gloss_;
+    double luminosity_;
+    RGB_color light_color_;
 
-        double gloss_;
-        Vec3 color_rem_;
-
-        double luminosity_;
-        RGB_color light_color_;
-
-        std::pair<double, double> x_range_;
-        std::pair<double, double> y_range_;
-        std::pair<double, double> z_range_;
-
-
-
-        virtual bool FindCollision(Ray &Ray) = 0;
-
-
-    private:
-
-
-
+    std::pair<double, double> x_range_;
+    std::pair<double, double> y_range_;
+    std::pair<double, double> z_range_;
 };
 
 class Triangle : public Body {
@@ -53,11 +45,12 @@ class Triangle : public Body {
         Body(gloss, color_rem, luminosity, light_color), 
         corners_(corners), 
         normal_((std::get<1>(corners) - std::get<0>(corners)).cross_product(std::get<2>(corners) - std::get<0>(corners)).normalize()) { }
+        ~Triangle() { }
 
         std::tuple<Vec3, Vec3, Vec3> corners_;
         Vec3 normal_;
 
-        bool FindCollision(Ray &Ray); 
+        bool FindCollision(Ray &Ray) {return true;}; 
 
     private:
 
@@ -73,7 +66,7 @@ class TriBody : public Body {
         std::vector<Triangle> triangles_;
         int n_triangles_;
 
-        bool FindCollision(Ray &Ray);
+        bool FindCollision(Ray &Ray) {return true;};
 
     private:
 
@@ -84,11 +77,11 @@ class Ball : public Body {
     public:
 
         Ball(Vec3 center, double radius, double gloss, Vec3 color_rem, double luminosity, RGB_color light_color) : Body(gloss, color_rem, luminosity, light_color), center_(center), radius_(radius) { }
-
+        ~Ball() { }
         Vec3 center_;
         double radius_;
 
-        bool FindCollision(Ray &Ray);
+        bool FindCollision(Ray& ray) {return true;};
 
     private:
 
