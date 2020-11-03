@@ -11,12 +11,13 @@ public:
     void RemoveColor(std::array<float,3>);
 
     RGB_color GetColor();
+    Path& GetPath() { return path_; }
 
     bool IsFinished() {return finished_;};
 
 private:
-    Path& path_;
-    RGB_color& color_;
+    Path path_;
+    RGB_color color_;
     std::array<float,3> color_rem_;
     size_t timeToLive_;
     bool finished_ = false;
