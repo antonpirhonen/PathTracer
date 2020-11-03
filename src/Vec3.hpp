@@ -1,4 +1,5 @@
-#pragma once
+#ifndef VEC3_HPP
+#define VEC3_HPP
 #include <cmath>
 
 
@@ -28,3 +29,4 @@ struct Vec3 {
 
 };
 
+#endif

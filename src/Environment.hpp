@@ -1,4 +1,5 @@
-#pragma once
+#ifndef ENVIRONMENT_HPP
+#define ENVIRONMENT_HPP
 #include "Body.hpp"
 #include <vector>
 
@@ -19,3 +20,5 @@ private:
     std::pair<float, float> y_range_;
     std::pair<float, float> z_range_;
 };
+
+#endif

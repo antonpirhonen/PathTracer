@@ -1,6 +1,6 @@
-#pragma once
+#ifndef STRUCTS_HPP
+#define STRUCTS_HPP
 #include <array>
-
 #include "Vec3.hpp"
 
 struct Path
@@ -16,4 +16,4 @@ struct RGB_color
     size_t blue_;
 };
 
-
+#endif

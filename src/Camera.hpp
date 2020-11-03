@@ -1,4 +1,5 @@
-#pragma once
+#ifndef CAMERA_HPP
+#define CAMERA_HPP
 #include <array>
 #include <iostream>
 
@@ -35,3 +36,4 @@ private:
     float y_angle_;
 };
 
+#endif

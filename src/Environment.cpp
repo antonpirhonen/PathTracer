@@ -14,9 +14,9 @@ void Environment::AddBody(const Body& body) {
 
 void Environment::PrintInfo() const {
     std::cout << bodies_.size() << " Bodies" << std::endl;
-    for (auto body : bodies_) {
-        //std::cout << body << std::endl;
-    }
+    // for (auto body : bodies_) {
+    //     std::cout << body << std::endl;
+    // }
 }
 
 void Environment::LoadEnvironment(std::string path) {

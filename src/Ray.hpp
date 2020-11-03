@@ -1,4 +1,5 @@
-#pragma once
+#ifndef RAY_HPP
+#define RAY_HPP
 #include <array>
 #include "structs.hpp"
 
@@ -22,3 +23,5 @@ private:
     size_t collisions_Left_;
     bool finished_ = false;
 };
+
+#endif

@@ -1,4 +1,5 @@
-#pragma once
+#ifndef BODY_HPP
+#define BODY_HPP
 #include "Vec3.hpp"
 #include "structs.hpp"
 #include "Ray.hpp"
@@ -93,3 +94,4 @@ class Ball : public Body {
 
 };
 
+#endif
