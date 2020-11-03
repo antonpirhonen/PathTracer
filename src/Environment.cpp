@@ -4,11 +4,11 @@
 
 Environment::Environment() { }
 
-std::vector<Body> const Environment::GetBodies() const {
+std::vector<Body*> const Environment::GetBodies() const {
     return bodies_;
 }
 
-void Environment::AddBody(const Body& body) {
+void Environment::AddBody(Body* body) {
     bodies_.push_back(body);
 }
 

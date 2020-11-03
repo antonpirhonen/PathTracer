@@ -22,6 +22,7 @@ private:
     std::array<float,3> color_rem_;
     size_t collisions_Left_;
     bool finished_ = false;
+    int Ceiling(float);
 };
 
 #endif
