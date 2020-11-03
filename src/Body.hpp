@@ -1,3 +1,4 @@
+#pragma once
 #include "Vec3.hpp"
 #include "structs.hpp"
 #include "Ray.hpp"
