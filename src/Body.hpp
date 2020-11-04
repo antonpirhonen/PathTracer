@@ -6,84 +6,19 @@
 #include <utility>
 #include <tuple>
 #include <vector>
+#include "Material.hpp"
 
-/*
 
-?? 
-
-What is correct color_rem type?
-
-Triangle point order? Is triangle normal calculated right?
-
-*/
-
+// Abstract base class for environment objects.
 class Body {
 
 public:
-    Body(double gloss, Vec3 color_rem, double luminosity, RGB_color light_color) 
-        : gloss_(gloss), color_rem_(color_rem), luminosity_(luminosity), light_color_(light_color) { }
-    
-    virtual ~Body() { }
-    virtual bool FindCollision(Ray &Ray) = 0;
+  Body(Material& material) : material_(material) { }
+  const Material& GetMaterial() const;
+  virtual float FindCollision(Ray &ray) const = 0;
 
 private:
-    Vec3 color_rem_;
-    double gloss_;
-    double luminosity_;
-    RGB_color light_color_;
-
-    std::pair<double, double> x_range_;
-    std::pair<double, double> y_range_;
-    std::pair<double, double> z_range_;
-};
-
-class Triangle : public Body {
-
-    public:
-
-        Triangle(std::tuple<Vec3, Vec3, Vec3> corners, double gloss, Vec3 color_rem, double luminosity, RGB_color light_color) :
-        Body(gloss, color_rem, luminosity, light_color), 
-        corners_(corners), 
-        normal_((std::get<1>(corners) - std::get<0>(corners)).cross_product(std::get<2>(corners) - std::get<0>(corners)).normalize()) { }
-        ~Triangle() { }
-
-        std::tuple<Vec3, Vec3, Vec3> corners_;
-        Vec3 normal_;
-
-        bool FindCollision(Ray &Ray) {return true;}; 
-
-    private:
-
-};
-
-class TriBody : public Body {
-
-    public:
-
-        TriBody(std::vector<Triangle> triangles, double gloss, Vec3 color_rem, double luminosity, RGB_color light_color) : Body(gloss, color_rem, luminosity, light_color),
-        triangles_(triangles), n_triangles_(triangles.size()) { }
-
-        std::vector<Triangle> triangles_;
-        int n_triangles_;
-
-        bool FindCollision(Ray &Ray) {return true;};
-
-    private:
-
-};
-
-class Ball : public Body {
-
-    public:
-
-        Ball(Vec3 center, double radius, double gloss, Vec3 color_rem, double luminosity, RGB_color light_color) : Body(gloss, color_rem, luminosity, light_color), center_(center), radius_(radius) { }
-        ~Ball() { }
-        Vec3 center_;
-        double radius_;
-
-        bool FindCollision(Ray& ray) {return true;};
-
-    private:
+  const Material& material_;
 
 };
 

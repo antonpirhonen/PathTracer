@@ -13,7 +13,8 @@ public:
     void RemoveColor(std::array<float,3>);
 
     RGB_color GetColor();
-
+    Path& GetPath() { return path_; }
+    
     bool IsFinished() {return finished_;};
 
 private:

@@ -9,4 +9,3 @@ debug:
 
 clean:
 	rm -f ./main
-
