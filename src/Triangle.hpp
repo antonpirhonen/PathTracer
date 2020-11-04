@@ -2,15 +2,18 @@
 #define TRIANGLE_HPP
 
 #include "Body.hpp"
+#include "Vec3.hpp"
 
 class Triangle : public Body {
 
 public:
-  Triangle(Material& material, std::tuple<Vec3, Vec3, Vec3> vertices);
+  Triangle(Material& material, Vec3 v0, Vec3 v1, Vec3 v2);
   float FindCollision(Ray &ray) const;
 
 private:
-  std::tuple<Vec3, Vec3, Vec3> vertices_;
+  Vec3 v0_;
+  Vec3 v1_;
+  Vec3 v2_;
   Vec3 unit_normal_;
 };
 

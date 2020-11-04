@@ -13,12 +13,12 @@
 class Body {
 
 public:
-  Body(Material& material) : material_(&material) { }
+  Body(Material& material) : material_(material) { }
   const Material& GetMaterial() const;
   virtual float FindCollision(Ray &ray) const = 0;
 
 private:
-  const Material* material_;
+  const Material& material_;
 
 };
 

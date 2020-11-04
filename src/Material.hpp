@@ -1,4 +1,7 @@
+// TODO
 class Material {
-  // TODO
+
+public:
+  Material() { }
 
 };

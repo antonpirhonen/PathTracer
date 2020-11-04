@@ -1,8 +1,12 @@
+#ifndef VEC3_HPP
+#define VEC3_HPP
+
 class Vec3 {
 
 public:
 
   Vec3(float x, float y, float z) : x_(x), y_(y), z_(z) { }
+  Vec3() : x_(0), y_(0), z_(0) { }
 
   float X() const;
   float Y() const;
@@ -41,3 +45,5 @@ private:
     float x_, y_, z_;
   
 };
+
+#endif

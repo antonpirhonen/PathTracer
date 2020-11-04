@@ -1,13 +1,12 @@
 #include "Triangle.hpp"
 
-Triangle::Triangle(Material& material, std::tuple<Vec3, Vec3, Vec3> vertices) :
-  Body(material), vertices_(vertices) {
-  Vec3 normal = (std::get<1>(vertices) -
-		 std::get<0>(vertices)).CrossProduct(std::get<2>(vertices) -
-						     std::get<0>(vertices));
-  normal.Normalize();
-  unit_normal_ = normal;
-}
+Triangle::Triangle(Material& material, Vec3 v0, Vec3 v1, Vec3 v2) 
+  : Body(material), v0_(v0), v1_(v1), v2_(v2) {
+    auto v3 = v2 - v0;
+    auto normal = (v1 - v0).CrossProduct(v3);
+    normal.Normalize();
+    unit_normal_ = normal;
+  }
 
 float Triangle::FindCollision(Ray &ray) const {
   // TODO: Proper implementation!
