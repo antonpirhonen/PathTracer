@@ -1,10 +1,12 @@
+#ifndef RAY_HPP
+#define RAY_HPP
 #include <array>
 #include "structs.hpp"
 
 class Ray {
 public:
-    Ray(Path& path, size_t timeToLive, RGB_color& color, std::array<float,3> color_rem = {1,1,1})
-        : path_(path), timeToLive_(timeToLive), color_(color), color_rem_(color_rem){}
+    Ray(Path& path, size_t collisions_Left, RGB_color& color, std::array<float,3> color_rem = {1,1,1})
+        : path_(path), collisions_Left_(collisions_Left), color_(color), color_rem_(color_rem){}
 
     void SetNewPath(Path&);
     void SetNewColor(RGB_color&);
@@ -12,13 +14,16 @@ public:
 
     RGB_color GetColor();
     Path& GetPath() { return path_; }
-
+    
     bool IsFinished() {return finished_;};
 
 private:
-    Path path_;
-    RGB_color color_;
+    Path& path_;
+    RGB_color& color_ ;
     std::array<float,3> color_rem_;
-    size_t timeToLive_;
+    size_t collisions_Left_;
     bool finished_ = false;
+    int Ceiling(float);
 };
+
+#endif
