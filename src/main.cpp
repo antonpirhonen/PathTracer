@@ -8,6 +8,7 @@
 
 int main() {
     auto environment = Environment();
+    environment.LoadEnvironment("./testenv.obj");
     environment.PrintInfo();
     auto material = Material();
     auto tr = Triangle(material, Vec3(3,4,8), Vec3(6,8,8), Vec3(3,4,8));
