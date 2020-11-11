@@ -14,7 +14,7 @@
 
 void CameraSimple::GetImage(Environment& env) {
     const size_t n_rays = x_reso_*y_reso_;
-    std::vector<Ray*> rays(n_rays);
+    std::vector<Ray> rays;
 
     std::vector<Body*> bodies = env.GetBodies();
     Vec3 tr_corner = Vec3{br_corner_.X(), br_corner_.Y(), tl_corner_.Z()};
@@ -24,7 +24,8 @@ void CameraSimple::GetImage(Environment& env) {
     size_t n;
     size_t m;
     Vec3 new_direction;
-    for (Ray* ray : rays) {
+
+    for (size_t i = 0; i < n_rays; i++){
         n = i%x_reso_;
         m = i/y_reso_;
         std::cout << "\nn = " << n << " m = " << m << std::endl;
@@ -32,18 +33,19 @@ void CameraSimple::GetImage(Environment& env) {
         new_direction = ray_dest.NormalizeReturnNew();
 //        std::cout << "Path origin = " << focal_point_.X() << " " << focal_point_.Y() << " " << focal_point_.Z() << " " << std::endl; 
 //        std::cout << "Path direction = " << new_direction.X() << " " << new_direction.Y() << " " << new_direction.Z() << std::endl; 
-        ray = new Ray(focal_point_, new_direction);
-        std::cout << "Path origin = " << ray->GetOrigin().X() << " " << ray->GetOrigin().Y() << " " << ray->GetOrigin().Z() << " " << std::endl; 
-        std::cout << "Path direction = " << ray->GetDirection().X() << " " << ray->GetDirection().Y() << " " << ray->GetDirection().Z() << std::endl; 
-        std::cout << "i = " << i << " ptr = " << ray << std::endl;
-        i ++;
-        while (!ray->IsFinished()) {
+        
+        Ray ray = Ray{focal_point_, new_direction};
+        rays.push_back(ray);
+        std::cout << "Path origin = " << ray.GetOrigin().X() << " " << ray.GetOrigin().Y() << " " << ray.GetOrigin().Z() << " " << std::endl; 
+        std::cout << "Path direction = " << ray.GetDirection().X() << " " << ray.GetDirection().Y() << " " << ray.GetDirection().Z() << std::endl; 
+        std::cout << "i = " << i << std::endl;
+        while (!ray.IsFinished()) {
             float min_distance = 1000000;
             float temp_distance = 0;
             Body* closest_body;
             bool hits_something = false;
             for (Body* body : bodies) {
-                temp_distance = body->FindCollision(*ray);
+                temp_distance = body->FindCollision(ray);
                 std::cout << "t_dist                     = " << temp_distance << std::endl;
                 if (temp_distance > 0 && temp_distance < min_distance) {
                     hits_something = true;
@@ -54,11 +56,11 @@ void CameraSimple::GetImage(Environment& env) {
             std::cout << "######### End of reflections "<< min_distance << std::endl;
 //            std::cout << "GC testi " << ray->GetColor().blue_ << std::endl;
             if(!hits_something){
-                ray->SetFinished();
+                ray.SetFinished();
             }
             else{
-                Vec3 reflection_point = ray->GetOrigin() + ray->GetDirection()*min_distance;
-                closest_body->Reflect(*ray, reflection_point);
+                Vec3 reflection_point = ray.GetOrigin() + ray.GetDirection()*min_distance;
+                closest_body->Reflect(ray, reflection_point);
             }
         }
     }
@@ -74,12 +76,12 @@ void CameraSimple::GetImage(Environment& env) {
         }
     }
     */
-    for (Ray* ray : rays) {
-        std::cout << "i = " << i << " ptr = " << ray << std::endl;
-        ofs << (char) ((*ray).GetColor().red_); 
-        ofs << (char) ((*ray).GetColor().green_); 
-        ofs << (char) ((*ray).GetColor().blue_);
+    for (size_t i = 0; i < n_rays; i++){
+        Ray ray = rays[i];
         std::cout << "i = " << i << std::endl;
+        ofs << (char) (ray.GetColor().red_); 
+        ofs << (char) (ray.GetColor().green_); 
+        ofs << (char) (ray.GetColor().blue_);
     }
     ofs.close();
 }

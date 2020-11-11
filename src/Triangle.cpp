@@ -12,7 +12,7 @@ Triangle::Triangle(Material& material, Vec3 v0, Vec3 v1, Vec3 v2)
 
 void Triangle::Reflect(Ray &ray, Vec3 &new_origin) {
   if (material_.GetLuminosity()){
-    ray.SetNewColor(material_.GetColor());
+    ray.SetNewColor(RGB_color{100,50,150});
     ray.SetFinished();
   }
   else {
