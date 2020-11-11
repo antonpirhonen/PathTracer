@@ -13,7 +13,8 @@ public:
   float Z() const;
 
   void Normalize();
-  
+  Vec3 NormalizeReturnNew();
+
   // For the operators, let's define 3 versions of each so that
   // it supports operations with two Vec3 objects as well as operations
   // with one Vec3 object and a float, in either order.
@@ -27,6 +28,7 @@ public:
 
   Vec3 operator - (const Vec3& v) const;
   Vec3 operator - (float c) const;
+  Vec3 operator - () const;
   friend Vec3 operator - (float c, const Vec3& v);
 
   Vec3 operator * (const Vec3& v) const;
@@ -39,6 +41,8 @@ public:
 
   float DotProduct(Vec3& v);
   Vec3 CrossProduct(Vec3& v);
+  float Norm();
+  Vec3 Reverse() const;
   
 private:
   

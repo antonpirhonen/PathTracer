@@ -16,4 +16,11 @@ struct RGB_color
     size_t blue_;
 };
 
+struct Color_removal
+{
+    float red_;
+    float green_;
+    float blue_;
+};
+
 #endif

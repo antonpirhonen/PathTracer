@@ -5,22 +5,26 @@
 
 class Ray {
 public:
-    Ray(Path& path, size_t collisions_Left, RGB_color& color, std::array<float,3> color_rem = {1,1,1})
-        : path_(path), collisions_Left_(collisions_Left), color_(color), color_rem_(color_rem){}
+    Ray(Vec3 origin, Vec3 direction, size_t collisions_Left = 10, RGB_color color = RGB_color{0,0,0}, Color_removal color_rem = Color_removal{1,1,1})
+        : origin_(origin), direction_(direction), collisions_Left_(collisions_Left), color_(color), color_rem_(color_rem){}
 
-    void SetNewPath(Path&);
-    void SetNewColor(RGB_color&);
-    void RemoveColor(std::array<float,3>);
+    void SetNewDirection(Vec3);
+    void SetNewOrigin(Vec3);
+    void SetNewColor(RGB_color);
+    void RemoveColor(Color_removal);
+    void SetFinished() { finished_ = true; };
 
     RGB_color GetColor();
-    Path& GetPath() { return path_; }
+    Vec3 GetDirection() {return direction_; };
+    Vec3 GetOrigin() {return origin_; };
     
-    bool IsFinished() {return finished_;};
+    bool IsFinished() {return finished_; };
 
 private:
-    Path& path_;
-    RGB_color& color_ ;
-    std::array<float,3> color_rem_;
+    Vec3 origin_;
+    Vec3 direction_;
+    RGB_color color_ ;
+    Color_removal color_rem_;
     size_t collisions_Left_;
     bool finished_ = false;
     int Ceiling(float);

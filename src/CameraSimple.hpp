@@ -13,10 +13,10 @@
 //This is not robust, must be addressed in main function.
 //template < int N_RAYS > 
 
-class Camera{
+class CameraSimple{
 public:
-    Camera(Path& direction, size_t x_reso = 1000, size_t y_reso = 1000, float x_angle = 45, float y_angle = 45)
-    : path_(direction), x_reso_(x_reso), y_reso_(y_reso), x_angle_(x_angle), y_angle_(y_angle) {}
+    CameraSimple(Vec3 focal_point, Vec3 tl_corner, Vec3 br_corner, size_t x_reso = 100, size_t y_reso = 100)
+    : focal_point_(focal_point), tl_corner_(tl_corner), br_corner_(br_corner), x_reso_(x_reso), y_reso_(y_reso) {}
 
     void GetImage(Environment& env);
     
@@ -28,13 +28,11 @@ public:
     std::string Time();
 
 private:
-//    std::array<Ray&, N_RAYS>& rays_;
-
-    Path& path_;
-    const size_t x_reso_;
-    const size_t y_reso_; 
-    float x_angle_;
-    float y_angle_;
+    size_t x_reso_;
+    size_t y_reso_; 
+    Vec3 focal_point_;
+    Vec3 tl_corner_;
+    Vec3 br_corner_;
 };
 
 #endif
