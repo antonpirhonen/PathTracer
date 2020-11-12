@@ -15,7 +15,7 @@ public:
     void LoadBodyFromFile(std::string);
 
 private:
-    std::vector<Body> bodies_ = { };
+    std::vector<Body*> bodies_ = { };
     std::pair<float, float> x_range_;
     std::pair<float, float> y_range_;
     std::pair<float, float> z_range_;

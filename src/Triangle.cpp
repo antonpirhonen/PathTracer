@@ -10,20 +10,22 @@ Triangle::Triangle(Material& material, Vec3 v0, Vec3 v1, Vec3 v2)
   }
 
 
-void Triangle::Reflect(Ray &ray, Vec3 &new_origin) {
+void Triangle::Reflect(Ray &ray, Vec3 &new_origin, RGB_color* color) {
   if (material_.GetLuminosity()){
-    ray.SetNewColor(RGB_color{100,50,150});
+    ray.SetNewColor(GetMaterial().GetColor());
     ray.SetFinished();
+    RGB_color new_color = GetMaterial().GetColor();
+    color = &new_color;
   }
   else {
     Vec3 normal;
     Vec3 old_direction = ray.GetDirection();
     float dot_product = old_direction.DotProduct(unit_normal_);
-    if (dot_product < 0){
+    if (dot_product > 0){
       normal = unit_normal_.Reverse();
       dot_product = -dot_product;
     }
-    Vec3 new_direction = old_direction-2*old_direction*dot_product;  
+    Vec3 new_direction = old_direction-2.0*unit_normal_*dot_product;  
     ray.RemoveColor(material_.GetColorRem());
     ray.SetNewOrigin(new_origin);
     ray.SetNewDirection(new_direction);

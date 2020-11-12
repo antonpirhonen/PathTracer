@@ -21,14 +21,15 @@ int main() {
 //    Triangle rad_tr = Triangle(radiant, Vec3{0,6,3}, Vec3{0,6,2}, Vec3{1,6,3});
     
 //    Triangle rad_tr = Triangle(radiant, Vec3{-2,6,5}, Vec3{2,6,1}, Vec3{2,6,5});
-    Triangle spec_tr = Triangle(specular, Vec3{1,-1,1}, Vec3{1,1,1}, Vec3{1,1,-1});
-    Triangle rad_tr1 = Triangle(radiant, Vec3{-1,-1,1}, Vec3{1,1,1}, Vec3{1,1,-1});
-    Triangle rad_tr2 = Triangle(radiant, Vec3{-1,-1,1}, Vec3{-1,-1,-1}, Vec3{-1,1,-1});
+    Triangle rad_tr = Triangle(radiant, Vec3{1,-1,1}, Vec3{1,1,1}, Vec3{1,1,-1});
+//    Triangle rad_tr1 = Triangle(radiant, Vec3{-1,-1,1}, Vec3{1,1,1}, Vec3{1,1,-1});
+//    Triangle rad_tr2 = Triangle(radiant, Vec3{-1,-1,1}, Vec3{-1,-1,-1}, Vec3{-1,1,-1});
     CameraSimple cam = CameraSimple(Vec3{0,0,0}, Vec3{1,-1,1}, Vec3{1,1,-1}, 10, 10);
 
-    env.AddBody(&spec_tr);
-    env.AddBody(&rad_tr1);
-    env.AddBody(&rad_tr2);
+    env.AddBody(&rad_tr);
+//    env.AddBody(&spec_tr);
+//    env.AddBody(&rad_tr1);
+//    env.AddBody(&rad_tr2);
     env.PrintInfo();
 
     cam.GetImage(env);

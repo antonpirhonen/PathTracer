@@ -9,7 +9,7 @@ class Triangle : public Body {
 public:
   Triangle(Material& material, Vec3 v0, Vec3 v1, Vec3 v2);
   float FindCollision(Ray &ray) const;
-  void Reflect(Ray &ray, Vec3 &new_origin);
+  void Reflect(Ray &ray, Vec3 &new_origin, RGB_color* color);
 
 private:
   Vec3 v0_;

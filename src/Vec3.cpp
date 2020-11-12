@@ -11,11 +11,6 @@ void Vec3::Normalize() {
   y_ *= len_inv;
   z_ *= len_inv;
 }
-
-Vec3 Vec3::NormalizeReturnNew() {
-  float len_inv = 1 / sqrt(x_*x_ + y_*y_ + z_*z_);
-  return Vec3{x_ *= len_inv, y_ *= len_inv, z_ *= len_inv};
-}
   
 Vec3 Vec3::operator + (const Vec3& v) const {
   return Vec3(x_ + v.X(), y_ + v.Y(), z_ + v.Z());
