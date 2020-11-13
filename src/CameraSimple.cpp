@@ -1,6 +1,5 @@
 #include <array>
 #include <vector>
-#include <iostream>
 #include <ctime>
 #include <fstream>
 #include <cstdio>
@@ -23,6 +22,11 @@ void CameraSimple::GetImage(Environment& env) {
     size_t m;
 
     for (size_t i = 0; i < n_rays; i++){
+        Ray ray = Ray{};
+        rays.push_back(ray);
+    }
+
+    for (size_t i = 0; i < n_rays; i++){
         n = i%x_reso_;
         m = i/y_reso_;
         Vec3 ray_dest = tl_corner_ + (float(n)/float(x_reso_))*(tr_corner-tl_corner_) + (float(m)/float(y_reso_))*(bl_corner-tl_corner_);
@@ -33,6 +37,7 @@ void CameraSimple::GetImage(Environment& env) {
             float temp_distance = 0;
             Body* closest_body;
             bool hits_something = false;
+
             for (Body* body : bodies) {
                 temp_distance = body->FindCollision(ray);
                 if (temp_distance > 0 && temp_distance < min_distance) {
@@ -41,15 +46,16 @@ void CameraSimple::GetImage(Environment& env) {
                     closest_body = body;
                 }
             }
-            if(!hits_something){
-                ray.SetFinished();
-            }
-            else{
+
+            if(hits_something){
                 Vec3 reflection_point = ray.GetOrigin() + ray.GetDirection()*min_distance;
                 closest_body->Reflect(ray, reflection_point);
             }
+            else{
+                ray.SetFinished();
+            }
         }
-        rays.push_back(ray);
+        rays[i] = ray;
     }
 
     std::ofstream ofs(CameraSimple::Time()+".ppm", std::ios_base::out | std::ios_base::binary);

@@ -1,7 +1,6 @@
 #ifndef CAMERA_HPP
 #define CAMERA_HPP
 #include <array>
-#include <iostream>
 
 #include "Environment.hpp"
 #include "Vec3.hpp"

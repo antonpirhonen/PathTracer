@@ -1,6 +1,6 @@
-#include "Vec3.hpp"
+pu#include "Vec3.hpp"
 #include <cmath>
-#include <iostream>
+
 float Vec3::X() const { return x_; }
 float Vec3::Y() const { return y_; }
 float Vec3::Z() const { return z_; }

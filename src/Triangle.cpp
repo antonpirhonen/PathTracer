@@ -1,4 +1,3 @@
-#include <iostream>
 #include "Triangle.hpp"
 
 Triangle::Triangle(Material& material, Vec3 v0, Vec3 v1, Vec3 v2) 

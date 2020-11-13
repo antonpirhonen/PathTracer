@@ -5,7 +5,7 @@
 
 class Ray {
 public:
-    Ray(Vec3 origin, Vec3 direction, size_t collisions_Left = 10, RGB_color color = RGB_color{0,0,0}, Color_removal color_rem = Color_removal{1,1,1})
+    Ray(Vec3 origin = Vec3{0,0,0}, Vec3 direction = Vec3{0,0,0}, size_t collisions_Left = 10, RGB_color color = RGB_color{0,0,0}, Color_removal color_rem = Color_removal{1,1,1})
         : origin_(origin), direction_(direction), collisions_Left_(collisions_Left), color_(color), color_rem_(color_rem){}
 
     void SetNewDirection(Vec3);
