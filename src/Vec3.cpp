@@ -52,15 +52,9 @@ Vec3 operator / (float c, const Vec3& v) {
   return Vec3(c / v.X(), c / v.Y(), c / v.Z());
 }
 float Vec3::DotProduct(Vec3& v) {
-//  std::cout << "DOT ";
-//  std::cout << x_ << " " << y_ << " " << z_ << "\n";
-//  std::cout << v.X() << " " << v.Y() << " " << v.Z() << std::endl;
   return x_*v.X() + y_*v.Y() + z_*v.Z();
 }
 Vec3 Vec3::CrossProduct(Vec3& v) {
-//  std::cout << "CROSS \n";
-//  std::cout << x_ << " " << y_ << " " << z_ << "\n";
-//  std::cout << v.X() << " " << v.Y() << " " << v.Z() << std::endl;
   return Vec3(y_*v.Z() - z_*v.Y(), z_*v.X() - x_*v.Z(), x_*v.Y() - y_*v.X());
 }
 float Vec3::Norm() {

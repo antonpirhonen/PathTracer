@@ -8,11 +8,6 @@
 #include "Ray.hpp"
 #include "structs.hpp"
 
-//a Camera is created with a defined resolution, can't be changed
-//is now constructed e.g. Camera<10000>(direction, x_reso, y_reso, x_angle, y_angle)
-//This is not robust, must be addressed in main function.
-//template < int N_RAYS > 
-
 class Camera{
 public:
     Camera(Path& direction, size_t x_reso = 1000, size_t y_reso = 1000, float x_angle = 45, float y_angle = 45)
@@ -28,8 +23,6 @@ public:
     std::string Time();
 
 private:
-//    std::array<Ray&, N_RAYS>& rays_;
-
     Path& path_;
     const size_t x_reso_;
     const size_t y_reso_; 

@@ -32,7 +32,7 @@ int main() {
 //    CameraSimple cam = CameraSimple(Vec3{0,0,0}, Vec3{1,-1,1}, Vec3{1,1,-1}, 10, 10);
 
 //Alkuperäinen
-    CameraSimple cam = CameraSimple(Vec3{0,0,0}, Vec3{4,-2,2}, Vec3{4,2,-2}, 1000, 1000);
+    CameraSimple cam = CameraSimple(Vec3{0,0,0}, Vec3{4,-2,2}, Vec3{4,2,-2}, 300, 300);
     Triangle spec_tr = Triangle(specular, Vec3{4,-2,2}, Vec3{6,-2,-3}, Vec3{6,3,2});
     Triangle rad_tr = Triangle(radiant, Vec3{4,1,-1}, Vec3{4,1,0}, Vec3{4,0,-1});
 

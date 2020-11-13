@@ -8,11 +8,6 @@
 #include "Ray.hpp"
 #include "structs.hpp"
 
-//a Camera is created with a defined resolution, can't be changed
-//is now constructed e.g. Camera<10000>(direction, x_reso, y_reso, x_angle, y_angle)
-//This is not robust, must be addressed in main function.
-//template < int N_RAYS > 
-
 class CameraSimple{
 public:
     CameraSimple(Vec3 focal_point, Vec3 tl_corner, Vec3 br_corner, size_t x_reso = 100, size_t y_reso = 100)
