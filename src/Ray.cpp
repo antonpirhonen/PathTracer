@@ -12,9 +12,9 @@ void Ray::SetNewOrigin(Vec3 orig){
 
 void Ray::SetNewColor(RGB_color ncolor){
     color_ = ncolor;
-    std::cout << "red " << ncolor.red_;   
-    std::cout << " blue " << ncolor.blue_;
-    std::cout << " green " << ncolor.green_ <<  std::endl;
+//    std::cout << "red " << ncolor.red_;   
+//    std::cout << " blue " << ncolor.blue_;
+//    std::cout << " green " << ncolor.green_ <<  std::endl;
 }
 
 void Ray::RemoveColor(Color_removal k){

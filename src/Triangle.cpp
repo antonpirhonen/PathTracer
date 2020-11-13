@@ -10,22 +10,22 @@ Triangle::Triangle(Material& material, Vec3 v0, Vec3 v1, Vec3 v2)
   }
 
 
-void Triangle::Reflect(Ray &ray, Vec3 &new_origin, RGB_color* color) {
+void Triangle::Reflect(Ray &ray, Vec3 &new_origin) {
   if (material_.GetLuminosity()){
-    ray.SetNewColor(GetMaterial().GetColor());
-    ray.SetFinished();
-    RGB_color new_color = GetMaterial().GetColor();
-    color = &new_color;
+    ray.SetFinished();  
   }
   else {
     Vec3 normal;
     Vec3 old_direction = ray.GetDirection();
     float dot_product = old_direction.DotProduct(unit_normal_);
-    if (dot_product > 0){
-      normal = unit_normal_.Reverse();
-      dot_product = -dot_product;
+    
+    if (dot_product < 0){
+//      normal = unit_normal_.Reverse();
+//      dot_product = -dot_product;
     }
+    
     Vec3 new_direction = old_direction-2.0*unit_normal_*dot_product;  
+    new_direction.Normalize();
     ray.RemoveColor(material_.GetColorRem());
     ray.SetNewOrigin(new_origin);
     ray.SetNewDirection(new_direction);
@@ -47,7 +47,7 @@ float Triangle::FindCollision(Ray& ray) const {
 //  std::cout << "FindCollision Determinant =" << determinant << tolerance << std::endl;
 
   if (std::abs(determinant) < tolerance){
-    std::cout << "parallel, det = " << determinant << std::endl;
+//    std::cout << "parallel, det = " << determinant << std::endl;
     return -1;
   }
   float inverse_determinant = 1/determinant;
@@ -56,7 +56,7 @@ float Triangle::FindCollision(Ray& ray) const {
 
   float u = t_vec.DotProduct(p_vec) * inverse_determinant;
   if (u < 0 || u > 1){
-    std::cout << "ohi, u = " << u << std::endl;
+//    std::cout << "ohi, u = " << u << std::endl;
     return -1;
 
   }
@@ -65,18 +65,18 @@ float Triangle::FindCollision(Ray& ray) const {
 
   float v = ray.GetDirection().DotProduct(q_vec) * inverse_determinant;
   if (v < 0 || u + v > 1){
-    std::cout << "ohi, v = " << v << std::endl;
+//    std::cout << "ohi, v = " << v << std::endl;
     return -1;
   }
 
 //  std::cout << "FindCollision 5\n" << std::endl;
   float distance = edge1.DotProduct(q_vec) * inverse_determinant;
   if (distance > tolerance){
-    std::cout << "osui, etäisyys = " << edge1.DotProduct(q_vec) * inverse_determinant << std::endl;
+//    std::cout << "osui, etäisyys = " << edge1.DotProduct(q_vec) * inverse_determinant << std::endl;
     return edge1.DotProduct(q_vec) * inverse_determinant;
   }
   else {
-    std::cout << "sama tai taka, d = " << distance << std::endl;
+//    std::cout << "sama tai taka, d = " << distance << std::endl;
     return -1;
   }
 

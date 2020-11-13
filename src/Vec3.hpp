@@ -13,7 +13,6 @@ public:
   float Z() const;
 
   void Normalize();
-  Vec3 NormalizeReturnNew();
 
   // For the operators, let's define 3 versions of each so that
   // it supports operations with two Vec3 objects as well as operations

@@ -10,25 +10,35 @@
 int main() {
     Environment env = Environment();
     env.PrintInfo();
-    Material specular = Material();
+    Material specular = Material(false, RGB_color{0,0,0}, Color_removal{1,0,0});
     Material radiant = Material(true, RGB_color{255,255,255}); 
 //Kertun
-//    CameraSimple cam = CameraSimple(Vec3{0,0,3}, Vec3{-2,6,5}, Vec3{2,6,1}, 10, 10);
+//    CameraSimple cam = CameraSimple(Vec3{0,0,3}, Vec3{-2,6,5}, Vec3{2,6,1}, 100, 100);
 //    Triangle spec_tr = Triangle(specular, Vec3{-2,12,5}, Vec3{-2, 14,1}, Vec3{2,13,5});
 //    Triangle rad_tr = Triangle(radiant, Vec3{0,11,3}, Vec3{0,11,2}, Vec3{1,11,3});
 //Sama lähempänä
-//    Triangle spec_tr = Triangle(specular, Vec3{-2,7,5}, Vec3{-2, 7,1}, Vec3{2,7,5});
+//    Triangle spec_tr = Triangle(radiant, Vec3{-2,7,5}, Vec3{-2, 7,1}, Vec3{2,7,5});
 //    Triangle rad_tr = Triangle(radiant, Vec3{0,6,3}, Vec3{0,6,2}, Vec3{1,6,3});
     
 //    Triangle rad_tr = Triangle(radiant, Vec3{-2,6,5}, Vec3{2,6,1}, Vec3{2,6,5});
-    Triangle rad_tr = Triangle(radiant, Vec3{1,-1,1}, Vec3{1,1,1}, Vec3{1,1,-1});
+//
+//    Triangle spec_tr = Triangle(specular, Vec3{1,-1,1}, Vec3{1,1,1}, Vec3{1,1,-1});
 //    Triangle rad_tr1 = Triangle(radiant, Vec3{-1,-1,1}, Vec3{1,1,1}, Vec3{1,1,-1});
 //    Triangle rad_tr2 = Triangle(radiant, Vec3{-1,-1,1}, Vec3{-1,-1,-1}, Vec3{-1,1,-1});
-    CameraSimple cam = CameraSimple(Vec3{0,0,0}, Vec3{1,-1,1}, Vec3{1,1,-1}, 10, 10);
+//    Kolmiot takaperin
+//    Triangle spec_tr = Triangle(specular, Vec3{1,-1,1}, Vec3{1,1,-1}, Vec3{1,1,1});
+//    Triangle rad_tr1 = Triangle(radiant, Vec3{-1,-1,1}, Vec3{1,1,1}, Vec3{1,1,-1});
+//    Triangle rad_tr2 = Triangle(radiant, Vec3{-1,-1,1}, Vec3{-1,-1,-1}, Vec3{-1,1,-1});
+//    CameraSimple cam = CameraSimple(Vec3{0,0,0}, Vec3{1,-1,1}, Vec3{1,1,-1}, 10, 10);
 
+//Alkuperäinen
+    CameraSimple cam = CameraSimple(Vec3{0,0,0}, Vec3{4,-2,2}, Vec3{4,2,-2}, 1000, 1000);
+    Triangle spec_tr = Triangle(specular, Vec3{4,-2,2}, Vec3{6,-2,-3}, Vec3{6,3,2});
+    Triangle rad_tr = Triangle(radiant, Vec3{4,1,-1}, Vec3{4,1,0}, Vec3{4,0,-1});
+
+//    env.AddBody(&rad_tr);
+    env.AddBody(&spec_tr);
     env.AddBody(&rad_tr);
-//    env.AddBody(&spec_tr);
-//    env.AddBody(&rad_tr1);
 //    env.AddBody(&rad_tr2);
     env.PrintInfo();
 

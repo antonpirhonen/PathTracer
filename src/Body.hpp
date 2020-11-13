@@ -16,7 +16,7 @@ public:
   Body(Material& material) : material_(material) { }
   const Material& GetMaterial() const;
   virtual float FindCollision(Ray &ray) const = 0;
-  virtual void Reflect(Ray &ray, Vec3 &new_origin, RGB_color* color) = 0;
+  virtual void Reflect(Ray &ray, Vec3 &new_origin) = 0;
 
 protected:
   const Material& material_;
