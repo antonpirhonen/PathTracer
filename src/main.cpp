@@ -12,25 +12,14 @@ int main() {
     env.PrintInfo();
     Material specular = Material(false, RGB_color{0,0,0}, Color_removal{1,0,0});
     Material radiant = Material(true, RGB_color{255,255,255}); 
-//Kertun
-//    CameraSimple cam = CameraSimple(Vec3{0,0,3}, Vec3{-2,6,5}, Vec3{2,6,1}, 100, 100);
-//    Triangle spec_tr = Triangle(specular, Vec3{-2,12,5}, Vec3{-2, 14,1}, Vec3{2,13,5});
-//    Triangle rad_tr = Triangle(radiant, Vec3{0,11,3}, Vec3{0,11,2}, Vec3{1,11,3});
-//Sama lähempänä
-//    Triangle spec_tr = Triangle(radiant, Vec3{-2,7,5}, Vec3{-2, 7,1}, Vec3{2,7,5});
-//    Triangle rad_tr = Triangle(radiant, Vec3{0,6,3}, Vec3{0,6,2}, Vec3{1,6,3});
-    
-//    Triangle rad_tr = Triangle(radiant, Vec3{-2,6,5}, Vec3{2,6,1}, Vec3{2,6,5});
-//
-//    Triangle spec_tr = Triangle(specular, Vec3{1,-1,1}, Vec3{1,1,1}, Vec3{1,1,-1});
-//    Triangle rad_tr1 = Triangle(radiant, Vec3{-1,-1,1}, Vec3{1,1,1}, Vec3{1,1,-1});
-//    Triangle rad_tr2 = Triangle(radiant, Vec3{-1,-1,1}, Vec3{-1,-1,-1}, Vec3{-1,1,-1});
-//    Kolmiot takaperin
+
+    //Kaksi yksinkertaista testiä
+    //Ensimmäinen
 //    Triangle spec_tr = Triangle(specular, Vec3{1,-1,1}, Vec3{1,1,-1}, Vec3{1,1,1});
 //    Triangle rad_tr1 = Triangle(radiant, Vec3{-1,-1,1}, Vec3{1,1,1}, Vec3{1,1,-1});
 //    Triangle rad_tr2 = Triangle(radiant, Vec3{-1,-1,1}, Vec3{-1,-1,-1}, Vec3{-1,1,-1});
 //    CameraSimple cam = CameraSimple(Vec3{0,0,0}, Vec3{1,-1,1}, Vec3{1,1,-1}, 10, 10);
-
+    //Toinen
 //Alkuperäinen
     CameraSimple cam = CameraSimple(Vec3{0,0,0}, Vec3{4,-2,2}, Vec3{4,2,-2}, 300, 300);
     Triangle spec_tr = Triangle(specular, Vec3{4,-2,2}, Vec3{6,-2,-3}, Vec3{6,3,2});
