@@ -5,17 +5,31 @@
 #include "structs.hpp"
 #include "Triangle.hpp"
 #include "Ball.hpp"
+#include "CameraSimple.hpp"
 
 int main() {
-    auto environment = Environment();
-    environment.LoadEnvironment("./testenv.obj");
-    environment.PrintInfo();
-    auto material = Material();
-    auto tr = Triangle(material, Vec3(3,4,8), Vec3(6,8,8), Vec3(3,4,8));
-    auto sphere = Ball(material, Vec3(12,4,8), 2);
-    environment.AddBody(&tr);
-    environment.AddBody(&sphere);
-    environment.PrintInfo();
+    Environment env = Environment();
+    env.PrintInfo();
+    Material specular = Material(false, RGB_color{0,0,0}, Color_removal{1,0,0});
+    Material radiant = Material(true, RGB_color{255,255,255}); 
 
+    //Kaksi yksinkertaista testiä
+    //Ensimmäinen
+//    Triangle spec_tr = Triangle(specular, Vec3{1,-1,1}, Vec3{1,1,-1}, Vec3{1,1,1});
+//    Triangle rad_tr1 = Triangle(radiant, Vec3{-1,-1,1}, Vec3{1,1,1}, Vec3{1,1,-1});
+//    Triangle rad_tr2 = Triangle(radiant, Vec3{-1,-1,1}, Vec3{-1,-1,-1}, Vec3{-1,1,-1});
+//    CameraSimple cam = CameraSimple(Vec3{0,0,0}, Vec3{1,-1,1}, Vec3{1,1,-1}, 10, 10);
+    //Toinen
+    CameraSimple cam = CameraSimple(Vec3{0,0,0}, Vec3{4,-2,2}, Vec3{4,2,-2}, 300, 300);
+    Triangle spec_tr = Triangle(specular, Vec3{4,-2,2}, Vec3{6,-2,-3}, Vec3{6,3,2});
+    Triangle rad_tr = Triangle(radiant, Vec3{4,1,-1}, Vec3{4,1,0}, Vec3{4,0,-1});
+
+//    env.AddBody(&rad_tr);
+    env.AddBody(&spec_tr);
+    env.AddBody(&rad_tr);
+//    env.AddBody(&rad_tr2);
+    env.PrintInfo();
+
+    cam.GetImage(env);
     return 0;
 }

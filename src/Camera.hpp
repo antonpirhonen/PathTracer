@@ -1,21 +1,16 @@
 #ifndef CAMERA_HPP
 #define CAMERA_HPP
 #include <array>
-#include <iostream>
 
 #include "Environment.hpp"
 #include "Vec3.hpp"
 #include "Ray.hpp"
 #include "structs.hpp"
 
-//a Camera is created with a defined resolution, can't be changed
-//is now constructed e.g. Camera<10000>(direction, x_reso, y_reso, x_angle, y_angle)
-//This is not robust, must be addressed in main function.
-//template < int N_RAYS > 
 class Camera{
 public:
-    Camera(Path& direction, size_t x_reso, size_t y_reso, float x_angle, float y_angle)
-    : direction_(direction), x_reso_(x_reso), y_reso_(y_reso), x_angle_(x_angle), y_angle_(y_angle) {}
+    Camera(Path& direction, size_t x_reso = 1000, size_t y_reso = 1000, float x_angle = 45, float y_angle = 45)
+    : path_(direction), x_reso_(x_reso), y_reso_(y_reso), x_angle_(x_angle), y_angle_(y_angle) {}
 
     void GetImage(Environment& env);
     
@@ -27,11 +22,9 @@ public:
     std::string Time();
 
 private:
-//    std::array<Ray&, N_RAYS>& rays_;
-
-    Path& direction_;
-    size_t x_reso_;
-    size_t y_reso_; 
+    Path& path_;
+    const size_t x_reso_;
+    const size_t y_reso_; 
     float x_angle_;
     float y_angle_;
 };

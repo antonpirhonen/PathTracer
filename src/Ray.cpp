@@ -1,16 +1,20 @@
 #include "Ray.hpp"
 #include "structs.hpp"
 
-void Ray::SetNewPath(Path& npath){
-    path_ = npath;
+void Ray::SetNewDirection(Vec3 dir){
+    direction_ = dir;
 }
 
-void Ray::SetNewColor(RGB_color& ncolor){
-    color_ = ncolor;
+void Ray::SetNewOrigin(Vec3 orig){
+    origin_ = orig;
 }
 
-void Ray::RemoveColor(std::array<float,3> k){
-    color_rem_= {k[0]*color_rem_[0], k[1]*color_rem_[1], k[2]*color_rem_[2]};
+void Ray::SetNewColor(RGB_color ncolor){
+    color_ = {ncolor.red_, ncolor.green_, ncolor.blue_};
+}
+
+void Ray::RemoveColor(Color_removal k){
+    color_rem_= {k.red_*color_rem_.red_, k.green_*color_rem_.green_, k.blue_*color_rem_.blue_};
 }
 
 int Ray::Ceiling(float n) {
@@ -22,10 +26,10 @@ int Ray::Ceiling(float n) {
 }
 
 RGB_color Ray::GetColor(){
-    size_t r = Ceiling(color_.red_ * color_rem_[0]);
-    size_t g = Ceiling(color_.green_ * color_rem_[1]);
-    size_t b = Ceiling(color_.blue_ * color_rem_[2]);
-
-    return RGB_color{r, g, b};
+    size_t r = Ceiling(color_.red_ * color_rem_.red_);
+    size_t g = Ceiling(color_.green_ * color_rem_.green_); 
+    size_t b = Ceiling(color_.blue_ * color_rem_.blue_);
+    RGB_color color = RGB_color{r,g,b};
+    return RGB_color{r,g,b};
 }
 

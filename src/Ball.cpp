@@ -1,4 +1,4 @@
-#include "Ball.hpp"
+/*#include "Ball.hpp"
 #include <limits>
 #include <cmath>
 
@@ -18,3 +18,7 @@ float Ball::FindCollision(Ray& ray) const {
     return (-b - sqrt(discriminant)) / (2.0*a);
 }
 
+void Ball::Reflect(Ray &ray, Vec3 &new_origin) {
+  Ray new_ray = ray;
+}
+*/
