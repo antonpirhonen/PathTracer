@@ -1,7 +1,7 @@
 #include "MaterialSpecular.hpp"
 #include "Material.hpp"
 #include "Vec3.hpp"
-#include "Random"
+
 
 Vec3 MaterialSpecular::Reflect(Vec3 original_direction, Vec3 unit_normal){
     
