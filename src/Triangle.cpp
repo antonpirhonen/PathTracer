@@ -15,14 +15,10 @@ void Triangle::Reflect(Ray &ray, Vec3 &new_origin) {
     ray.SetNewColor(GetMaterial().GetColor());
   }
   else {
-    Vec3 normal;
-    Vec3 old_direction = ray.GetDirection();
-    float dot_product = old_direction.DotProduct(unit_normal_);
-    Vec3 new_direction = old_direction-2.0*unit_normal_*dot_product;  
-    new_direction.Normalize();
     ray.RemoveColor(material_.GetColorRem());
     ray.SetNewOrigin(new_origin);
-    ray.SetNewDirection(new_direction);
+    Vec3 new_direction = material_.Reflect(ray.GetDirection());
+    ray.SetNewDirection(new_direction, unit_normal_);
   }
 }
 
