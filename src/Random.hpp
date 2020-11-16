@@ -45,13 +45,13 @@ namespace Random {
         auto a1 = atan2(sqrt(vector.X() * vector.X() + vector.Y() * vector.Y()), vector.Z());
         auto a2 = atan2(vector.Y(), vector.X());
 
-        double R[3][3] = {(cos(a1) * cos(a2), -sin(a2), sin(a1) * cos(a2)),
-                        (cos(a1) * sin(a2), cos(a2), sin(a1) * sin(a2)),
-                        (-sin(a1), 0, cos(a1))};
+        double R[3][3] = {{cos(a1) * cos(a2), -sin(a2), sin(a1) * cos(a2)},
+                        {cos(a1) * sin(a2), cos(a2), sin(a1) * sin(a2)},
+                        {-sin(a1), 0, cos(a1)}};
 
-        return Vec3((randomVector.X() * R[0][0] + randomVector.Y() * R[1][0] + randomVector.Z() * R[2][0]),
-                    (randomVector.X() * R[0][1] + randomVector.Y() * R[1][1] + randomVector.Z() * R[2][1]),
-                    (randomVector.X() * R[0][2] + randomVector.Y() * R[1][2] + randomVector.Z() * R[2][2]));
+        return Vec3((randomVector.X() * R[0][0] + randomVector.Y() * R[0][1] + randomVector.Z() * R[0][2]),
+                    (randomVector.X() * R[1][0] + randomVector.Y() * R[1][1] + randomVector.Z() * R[1][2]),
+                    (randomVector.X() * R[2][0] + randomVector.Y() * R[2][1] + randomVector.Z() * R[2][2]));
 
     }
 
