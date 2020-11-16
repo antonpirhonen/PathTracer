@@ -17,8 +17,8 @@ void Triangle::Reflect(Ray &ray, Vec3 &new_origin) {
   else {
     ray.RemoveColor(material_.GetColorRem());
     ray.SetNewOrigin(new_origin);
-    Vec3 new_direction = material_.Reflect(ray.GetDirection());
-    ray.SetNewDirection(new_direction, unit_normal_);
+    Vec3 new_direction = material_.Reflect(ray.GetDirection(), unit_normal_);
+    ray.SetNewDirection(new_direction);
   }
 }
 
