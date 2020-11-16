@@ -11,7 +11,7 @@ public:
 
   const Color_removal GetColorRem() const { return color_rem_; };
 
-  virtual Vec3 Reflect(Vec3) = 0;
+  virtual Vec3 Reflect(Vec3, Vec3) = 0;
 protected:
   const bool luminous_;
   const RGB_color color_;

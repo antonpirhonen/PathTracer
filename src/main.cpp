@@ -6,12 +6,13 @@
 #include "Triangle.hpp"
 #include "Ball.hpp"
 #include "CameraSimple.hpp"
+#include "MaterialSpecular.hpp"
 
 int main() {
     Environment env = Environment();
     env.PrintInfo();
-    Material specular = Material(false, RGB_color{0,0,0}, Color_removal{1,0,0});
-    Material radiant = Material(true, RGB_color{255,255,255}); 
+    MaterialSpecular specular = MaterialSpecular(false, RGB_color{0,0,0}, Color_removal{1,0,0});
+    MaterialSpecular radiant = MaterialSpecular(true, RGB_color{255,255,255}); 
 
     //Kaksi yksinkertaista testiä
     //Ensimmäinen
