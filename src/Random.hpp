@@ -33,10 +33,10 @@ namespace Random {
         return Vec3(randomNumber(min, max), randomNumber(min, max), randomNumber(min, max));
     }
 
-    //returns random vector atleast "degree" degrees away from given vector "vector"
+    //returns random vector atmost "degree" degrees away from given vector "vector"
     Vec3 RandomVector(Vec3 vector, float degree) {
 
-        auto angle = degree * 180 / M_PI;
+        auto angle = degree * M_PI / 180.0;
         auto phi_lower = M_PI - angle;
         auto theta = 2 * M_PI * randomNumber();
         auto phi = acos(1 - (cos(phi_lower) + 1) * randomNumber());
