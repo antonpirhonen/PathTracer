@@ -40,6 +40,6 @@ int main() {
 //    env.AddBody(&rad_tr2);
     env.PrintInfo();
 
-    cam.GetImage(env);
+    cam.GetImage(env,10);
     return 0;
 }

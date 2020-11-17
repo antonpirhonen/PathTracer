@@ -1,7 +1,6 @@
 #include "Color.hpp"
-#include <stdexcept>
 
-Color::Color(float r, float g, float b) {
+Color::Color(float r, float g, float b) : r_(r), g_(g), b_(b) {
   if (r < 0 || r > 1 || g < 0 || g > 1 || b < 0 || b > 1) {
     throw std::invalid_argument("Values given to the constructor of class"
 				" Color were not between 0 and 1");
@@ -34,14 +33,14 @@ std::tuple<int, int, int> Color::GetComponents255() const {
 }
 
 Color Color::operator + (const Color& c) const {
-  std::tuple<int, int, int> col = c.GetComponents();
+  std::tuple<float, float, float> col = c.GetComponents();
   return Color(r_ + std::get<0>(col),
 	       g_ + std::get<1>(col),
 	       b_ + std::get<2>(col));
 }
 
 Color Color::operator * (const Color& c) const {
-  std::tuple<int, int, int> col = c.GetComponents();
+  std::tuple<float, float, float> col = c.GetComponents();
   return Color(r_ * std::get<0>(col),
 	       g_ * std::get<1>(col),
 	       b_ * std::get<2>(col));
