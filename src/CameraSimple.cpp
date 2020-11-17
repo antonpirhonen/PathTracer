@@ -3,7 +3,7 @@
 #include <ctime>
 #include <fstream>
 #include <cstdio>
-
+#include <iostream>
 #include "Environment.hpp"
 #include "Vec3.hpp"
 #include "Ray.hpp"
@@ -32,6 +32,7 @@ void CameraSimple::GetImage(Environment& env) {
         Vec3 ray_dest = tl_corner_ + (float(n)/float(x_reso_))*(tr_corner-tl_corner_) + (float(m)/float(y_reso_))*(bl_corner-tl_corner_);
         ray_dest.Normalize();
         Ray ray = Ray{focal_point_, ray_dest};
+        std::cout << i << std::endl;
         while (!ray.IsFinished()) {
             float min_distance = 1000000;
             float temp_distance = 0;

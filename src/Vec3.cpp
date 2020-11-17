@@ -1,4 +1,4 @@
-pu#include "Vec3.hpp"
+#include "Vec3.hpp"
 #include <cmath>
 
 float Vec3::X() const { return x_; }

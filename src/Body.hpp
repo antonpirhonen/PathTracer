@@ -19,7 +19,7 @@ public:
   virtual void Reflect(Ray &ray, Vec3 &new_origin) = 0;
 
 protected:
-  const Material& material_;
+  Material& material_;
 
 };
 

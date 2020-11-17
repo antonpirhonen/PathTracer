@@ -1,6 +1,8 @@
+#ifndef MATERIAL_HPP
+#define MATERIAL_HPP
+
 #include "structs.hpp"
 class Material {
-
 public:
   Material(bool luminous = false, RGB_color color = RGB_color{0,0,0}, Color_removal color_rem = Color_removal{1,1,1} ) :
     luminous_(luminous), color_(color) , color_rem_(color_rem) { };
@@ -11,8 +13,11 @@ public:
 
   const Color_removal GetColorRem() const { return color_rem_; };
 
-private:
+  virtual Vec3 Reflect(Vec3, Vec3) = 0;
+protected:
   const bool luminous_;
   const RGB_color color_;
   const Color_removal color_rem_;
 };
+
+#endif

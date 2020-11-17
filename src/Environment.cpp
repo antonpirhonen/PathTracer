@@ -4,6 +4,7 @@
 #include <fstream>
 #include <sstream>
 #include "Vec3.hpp"
+#include "MaterialSpecular.hpp"
 
 Environment::Environment() { }
 
@@ -54,7 +55,7 @@ void Environment::LoadEnvironment(std::string path) {
     std::string line;
     std::vector<Vec3> vertices;
     std::vector<Vec3> normals;
-    Material material = Material();
+    MaterialSpecular material = MaterialSpecular();
     while (std::getline(file, line)) {
         if (line.substr(0, 2)== "v "){
             std::istringstream iss(line.substr(2));
