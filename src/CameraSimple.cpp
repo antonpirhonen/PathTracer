@@ -22,8 +22,8 @@ void CameraSimple::GetImage(Environment& env) {
     size_t m;
 
     for (size_t i = 0; i < n_rays; i++){
-        Ray ray = Ray{};
-        rays.push_back(ray);
+      Ray ray = Ray();
+      rays.push_back(ray);
     }
 
     for (size_t i = 0; i < n_rays; i++){
@@ -32,7 +32,6 @@ void CameraSimple::GetImage(Environment& env) {
         Vec3 ray_dest = tl_corner_ + (float(n)/float(x_reso_))*(tr_corner-tl_corner_) + (float(m)/float(y_reso_))*(bl_corner-tl_corner_);
         ray_dest.Normalize();
         Ray ray = Ray{focal_point_, ray_dest};
-        std::cout << i << std::endl;
         while (!ray.IsFinished()) {
             float min_distance = 1000000;
             float temp_distance = 0;
@@ -54,6 +53,7 @@ void CameraSimple::GetImage(Environment& env) {
             }
             else{
                 ray.SetFinished();
+		ray.SetNewColor(Color(0,0,0));
             }
         }
         rays[i] = ray;
@@ -61,11 +61,12 @@ void CameraSimple::GetImage(Environment& env) {
 
     std::ofstream ofs(CameraSimple::Time()+".ppm", std::ios_base::out | std::ios_base::binary);
     ofs << "P6" << std::endl << x_reso_ << ' ' << y_reso_ << std::endl << "255" << std::endl;    
-    for (size_t i = 0; i < n_rays; i++){
+    for (size_t i = 0; i < n_rays; i++) {
         Ray ray = rays[i];
-        ofs << (char) (ray.GetColor().red_); 
-        ofs << (char) (ray.GetColor().green_); 
-        ofs << (char) (ray.GetColor().blue_);
+	std::tuple<int, int, int> rgb = ray.GetColor().GetComponents255();
+        ofs << static_cast<unsigned char>(std::get<0>(rgb)); 
+        ofs << static_cast<unsigned char>(std::get<1>(rgb)); 
+        ofs << static_cast<unsigned char>(std::get<2>(rgb));
     }
     ofs.close();
 }    
