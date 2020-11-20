@@ -44,43 +44,43 @@ void CameraSimple::GetImage(Environment& env, unsigned int spp) {
         Vec3 ray_dest = tl_corner_ + (float(n)/float(x_reso_))*(tr_corner-tl_corner_) + (float(m)/float(y_reso_))*(bl_corner-tl_corner_);
         ray_dest.Normalize();
 	for (unsigned int sample = 0; sample < spp; sample++) {
-	  Ray ray = Ray(focal_point_, ray_dest);
-	  while (!ray.IsFinished()) {
-            float min_distance = 1000000;
-            float temp_distance = 0;
-            Body* closest_body;
-            bool hits_something = false;
+	    Ray ray = Ray(focal_point_, ray_dest);
+	    while (!ray.IsFinished()) {
+		float min_distance = 1000000;
+		float temp_distance = 0;
+		Body* closest_body;
+		bool hits_something = false;
 	    
-            for (Body* body : bodies) {
-	      temp_distance = body->FindCollision(ray);
-	      if (temp_distance > 0 && temp_distance < min_distance) {
-		hits_something = true;
-		min_distance = temp_distance;
-		closest_body = body;
-	      }
-            }
+		for (Body* body : bodies) {
+		    temp_distance = body->FindCollision(ray);
+		    if (temp_distance > 0 && temp_distance < min_distance) {
+			hits_something = true;
+			min_distance = temp_distance;
+			closest_body = body;
+		    }
+		}
 	    
-            if(hits_something){
-	      Vec3 reflection_point = ray.GetOrigin() + ray.GetDirection()*min_distance;
-	      closest_body->Reflect(ray, reflection_point);
-            }
-            else{
-	      ray.SetFinished();
-	      ray.SetNewColor(Color(0,0,0));
-            }
-	  }
-	  Color addition = ray.GetColor() / spp;
-	  // We need to catch for exceptions since rounding errors might produce
-	  // values larger than 1 for the color components.
-	  // TODO: Come up with a cleaner approach to this. Now we just don't add if it would overflow.
-	  Color new_c(0,0,0);
-	  try {
-	    new_c = colors[i] + addition;
-	  }
-	  catch (const std::invalid_argument& ia) {
-	    new_c = colors[i];
-	  }
-	  colors[i] = new_c;
+		if(hits_something){
+		    Vec3 reflection_point = ray.GetOrigin() + ray.GetDirection()*min_distance;
+		    closest_body->Reflect(ray, reflection_point);
+		}
+		else{
+		    ray.SetFinished();
+		    ray.SetNewColor(Color(0,0,0));
+		}
+	    }
+	    Color addition = ray.GetColor() / spp;
+	    // We need to catch for exceptions since rounding errors might produce
+	    // values larger than 1 for the color components.
+	    // TODO: Come up with a cleaner approach to this. Now we just don't add if it would overflow.
+	    Color new_c(0,0,0);
+	    try {
+		new_c = colors[i] + addition;
+	    }
+	    catch (const std::invalid_argument& ia) {
+		new_c = colors[i];
+	    }
+	    colors[i] = new_c;
 	} // sample
     } // i
 

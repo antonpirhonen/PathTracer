@@ -3,7 +3,7 @@
 
 class MaterialTransparent : public Material {
 public:
-  MaterialTransparent(bool luminous = false, Color color = Color(0,0,0), Color color_rem = Color(1,1,1), float ref_index = 1) :
+    MaterialTransparent(bool luminous = false, Color color = Color(0,0,0), Color color_rem = Color(1,1,1), float ref_index = 1) :
         Material(luminous, color, color_rem), ref_index_(ref_index)  { };
 
     Vec3 Reflect(Vec3 original_direction, Vec3 unit_normal);

@@ -10,14 +10,14 @@ void Ray::SetNewOrigin(Vec3 orig){
 }
 
 void Ray::SetNewColor(Color ncolor){
-  color_ = ncolor;
+    color_ = ncolor;
 }
 
 void Ray::RemoveColor(Color k){
-  color_= color_ * k;
+    color_= color_ * k;
 }
 
 Color Ray::GetColor(){
-  return color_;
+    return color_;
 }
 
