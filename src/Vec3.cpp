@@ -1,3 +1,5 @@
+#ifndef VEC3_CPP
+#define VEC3_CPP
 #include "Vec3.hpp"
 #include <cmath>
 
@@ -63,3 +65,5 @@ float Vec3::Norm() {
 Vec3 Vec3::Reverse() const {
   return Vec3(- x_, - y_, - x_);
 }
+
+#endif

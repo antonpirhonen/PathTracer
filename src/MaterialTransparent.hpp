@@ -1,3 +1,5 @@
+#ifndef TRANSPARENT_HPP
+#define TRANSPARENT_HPP
 #include "structs.hpp"
 #include "Material.hpp"
 
@@ -11,3 +13,5 @@ public:
 private:
     float ref_index_;
 };
+
+#endif
