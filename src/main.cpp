@@ -11,14 +11,10 @@
 #include "MaterialTransparent.hpp"
 #include "Color.hpp"
 
-static void foo() {
-    return;
-}
-
 int main() {
     Environment env = Environment();
     env.PrintInfo();
-    MaterialDiffuse diffuse = MaterialDiffuse(false, Color(0,0,0), Color(1,0,0), 0.01);
+    MaterialDiffuse diffuse = MaterialDiffuse(false, Color(0,0,0), Color(0.75,0,0.65), 0.01);
     MaterialSpecular specular = MaterialSpecular(false, Color(0,0,0), Color(1,1,0));
     MaterialSpecular radiant = MaterialSpecular(true, Color(1,1,1)); 
     MaterialTransparent transparent = MaterialTransparent(false, Color(0,0,0), Color(1,0,0), 2);

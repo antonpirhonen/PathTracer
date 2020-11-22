@@ -18,8 +18,8 @@ Color::Color(std::tuple<float, float, float> rgb) {
 				    " Color were not between 0 and 1");
     }
     r_ = std::get<0>(rgb);
-    g_ = std::get<0>(rgb);
-    b_ = std::get<0>(rgb);
+    g_ = std::get<1>(rgb);
+    b_ = std::get<2>(rgb);
 }
   
 std::tuple<float, float, float> Color::GetComponents() const {
