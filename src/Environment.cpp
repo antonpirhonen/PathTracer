@@ -3,16 +3,22 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <vector>
 #include "Vec3.hpp"
 #include "MaterialSpecular.hpp"
 
 Environment::Environment() { }
+Environment::~Environment() {
+    // for (auto body : bodies_) {
+    //     delete body;
+    // }
+}
 
-std::vector<Body*> const Environment::GetBodies() const {
+std::vector<Triangle>& Environment::GetBodies() {
     return bodies_;
 }
 
-void Environment::AddBody(Body* body) {
+void Environment::AddBody(Triangle& body) {
     bodies_.push_back(body);
 }
 
@@ -41,11 +47,13 @@ std::vector<std::string> Split(std::string str, char c) {
         }
         count++;
     }
+    parts.push_back(current);
 
     return parts;
 }
 
-void Environment::LoadEnvironment(std::string path) {
+
+void Environment::LoadEnvironment(std::string path, Material& material) {
     std::ifstream file (path);
     if (!file.is_open()) {
         std::cout << ".obj file " << path <<" not found" << std::endl;
@@ -55,7 +63,7 @@ void Environment::LoadEnvironment(std::string path) {
     std::string line;
     std::vector<Vec3> vertices;
     std::vector<Vec3> normals;
-    MaterialSpecular material = MaterialSpecular();
+    //MaterialSpecular material = MaterialSpecular(true, Color(1,1,1));
     while (std::getline(file, line)) {
         if (line.substr(0, 2)== "v "){
             std::istringstream iss(line.substr(2));
@@ -66,21 +74,25 @@ void Environment::LoadEnvironment(std::string path) {
             std::istringstream iss(line.substr(2));
             std::string a, b, c;
             iss>>a;iss>>b;iss>>c;
-            std::cout << "A: " << a << ", B: " << b << ", C: " << c << std::endl;
             int slashCount = Count(a, '/');
             if (slashCount == 2) {
                 auto parts_a = Split(a, '/');
                 auto parts_b = Split(b, '/');
                 auto parts_c = Split(c, '/');
-                bodies_.push_back(new Triangle(material,
-                    vertices.at(std::stoi(parts_a[0])-1),
-                    vertices.at(std::stoi(parts_b[0])-1),
-                    vertices.at(std::stoi(parts_c[0])-1)));
+                Triangle tr = Triangle(material,
+                    vertices.at(std::stoi(parts_a.at(0))-1),
+                    vertices.at(std::stoi(parts_b.at(0))-1),
+                    vertices.at(std::stoi(parts_c.at(0))-1),
+                    normals.at(std::stoi(parts_a.at(2))-1),
+                    normals.at(std::stoi(parts_b.at(2))-1),
+                    normals.at(std::stoi(parts_c.at(2))-1));
+                bodies_.push_back(tr);
             } else if (slashCount == 0) {
-                bodies_.push_back(new Triangle(material,
+                Triangle tr = Triangle(material,
                     vertices.at(std::stoi(a)-1),
                     vertices.at(std::stoi(b)-1),
-                    vertices.at(std::stoi(c)-1)));
+                    vertices.at(std::stoi(c)-1));
+                bodies_.push_back(tr);
             }
         } else if ((line.substr(0, 2)== "vn")) {
             std::istringstream iss(line.substr(2));
