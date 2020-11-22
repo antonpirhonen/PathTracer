@@ -22,7 +22,7 @@ void CameraSimple::GetImage(Environment& env) {
     size_t m;
 
     for (size_t i = 0; i < n_rays; i++){
-        Ray ray = Ray{};
+        Ray ray = Ray();
         rays.push_back(ray);
     }
 
@@ -31,17 +31,17 @@ void CameraSimple::GetImage(Environment& env) {
         m = i/y_reso_;
         Vec3 ray_dest = tl_corner_ + (float(n)/float(x_reso_))*(tr_corner-tl_corner_) + (float(m)/float(y_reso_))*(bl_corner-tl_corner_);
         ray_dest.Normalize();
-        Ray ray = Ray{focal_point_, ray_dest};
+        Ray ray = Ray(focal_point_, ray_dest);
         std::cout << i << std::endl;
         while (!ray.IsFinished()) {
-            float min_distance = 1000000;
-            float temp_distance = 0;
+            std::tuple<float, float, float> min_distance = std::make_tuple(1000000, -1, -1);
+            std::tuple<float, float, float> temp_distance = std::make_tuple(0,0,0);
             Body* closest_body;
             bool hits_something = false;
 
             for (Body* body : bodies) {
                 temp_distance = body->FindCollision(ray);
-                if (temp_distance > 0 && temp_distance < min_distance) {
+                if (std::get<0>(temp_distance) > 0 && std::get<0>(temp_distance) < std::get<0>(min_distance)) {
                     hits_something = true;
                     min_distance = temp_distance;
                     closest_body = body;
@@ -49,8 +49,8 @@ void CameraSimple::GetImage(Environment& env) {
             }
 
             if(hits_something){
-                Vec3 reflection_point = ray.GetOrigin() + ray.GetDirection()*min_distance;
-                closest_body->Reflect(ray, reflection_point);
+                Vec3 reflection_point = ray.GetOrigin() + ray.GetDirection()*std::get<0>(min_distance);
+                closest_body->Reflect(ray, reflection_point, std::get<1>(min_distance), std::get<2>(min_distance));
             }
             else{
                 ray.SetFinished();
