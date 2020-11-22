@@ -16,7 +16,7 @@ Triangle::Triangle(Material& material, Vec3 v0, Vec3 v1, Vec3 v2)
 void Triangle::Reflect(Ray &ray, Vec3 &new_origin, float u, float v) {
   if (material_.GetLuminosity()){
     ray.SetFinished();  
-    ray.SetNewColor(GetMaterial().GetColor());
+    ray.RemoveColor(GetMaterial().GetColor());
   }
   else {
     ray.RemoveColor(material_.GetColorRem());
