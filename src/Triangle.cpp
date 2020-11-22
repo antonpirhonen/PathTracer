@@ -10,7 +10,7 @@ Triangle::Triangle(Material& material, Vec3 v0, Vec3 v1, Vec3 v2)
     auto normal = (v1 - v0).CrossProduct(v3);
     normal.Normalize();
     unit_normal_ = normal;
-  }
+}
 
 
 void Triangle::Reflect(Ray &ray, Vec3 &new_origin, float u, float v) {
@@ -30,7 +30,6 @@ std::tuple<float, float, float> Triangle::FindCollision(Ray& ray) const {
   float tolerance = 0.00001;
   Vec3 edge0 = v1_ - v0_;
   Vec3 edge1 = v2_ - v0_;
-
   Vec3 p_vec = ray.GetDirection().CrossProduct(edge1);
   Vec3 t_vec = ray.GetOrigin() - v0_;
   Vec3 q_vec = t_vec.CrossProduct(edge0);
