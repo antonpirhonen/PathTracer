@@ -21,7 +21,7 @@ void CameraSimple::GetImage(Environment& env, unsigned int spp) {
     size_t m;
 
     // Uncomment the next expression to distribute the computation across all available CPU cores
-    //#pragma omp parallel for
+    #pragma omp parallel for
     for (int i = 0; i < y_reso_; i++) {
 	for (int j = 0; j < x_reso_; j++) {
 	    Vec3 ray_dest = tl_corner_ + (float(j)/float(x_reso_))*(tr_corner-tl_corner_) + (float(i)/float(y_reso_))*(bl_corner-tl_corner_);
