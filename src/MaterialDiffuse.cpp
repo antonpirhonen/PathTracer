@@ -9,7 +9,6 @@
 
 Vec3 MaterialDiffuse::Reflect(Vec3 original_direction, Vec3 unit_normal){
     
-//    std::cout << "Diffuse " << std::endl;
     float dot_product = original_direction.DotProduct(unit_normal);
     Vec3 new_direction = original_direction - 2.0*unit_normal*dot_product;
     Vec3 rand_direction;

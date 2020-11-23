@@ -10,9 +10,9 @@
 #include <cmath>
 
 Vec3 MaterialTransparent::Reflect(Vec3 original_direction, Vec3 unit_normal){
-//    std::cout << "TRANSPARENT" << std::endl; 
-    //tarkista tuleeko säde sisältä vai ulkoa ok
-    //lasketaan tulokulma normaaliin nähden pistetulosta dot_product ok
+
+    //tarkista tuleeko säde sisältä vai ulkoa
+    //lasketaan tulokulma normaaliin nähden pistetulosta dot_product
     //sisältä tullessa tarkistetaan kokonaisheijastumisen kulma sin(tulokulma) > 1/refraktiivinen indeksi 
     //jos kokonaisheijastus, reflektoidaan kuten speculaari (1. return)
     //Snellin laki antaa mahdollisen taittuneen kulman
