@@ -55,7 +55,6 @@ float Triangle::FindCollision(Ray& ray) const {
     //hits triangle
     float distance = edge1.DotProduct(q_vec) * inverse_determinant;
     if (distance > tolerance){
-//      std::cout << "U = " << u << ", V = " << v << std::endl;
 	    return edge1.DotProduct(q_vec) * inverse_determinant;
     }
     else {

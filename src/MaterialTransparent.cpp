@@ -29,13 +29,14 @@ Vec3 MaterialTransparent::Reflect(Vec3 original_direction, Vec3 unit_normal){
     float n2 = ref_index_;
 
     if (orig_dot_n > 0 ){
-        n1 = ref_index_;
-        n2 = 1.0;
         if(sin_orig > 1/n2){
             Vec3 new_direction = original_direction - 2.0*unit_normal*orig_dot_n;  
             new_direction.Normalize();
-//            std::cout << "Kokonaisheijastuminen " << sin_orig << std::endl; EI TOIMI
             return new_direction;
+        }
+        else{
+            n1 = ref_index_;
+            n2 = 1.0;
         }
     }
     //Snell
@@ -51,16 +52,13 @@ Vec3 MaterialTransparent::Reflect(Vec3 original_direction, Vec3 unit_normal){
     if(Random::randomNumber() < r){
         Vec3 new_direction = original_direction - 2.0*unit_normal*orig_dot_n;  
         new_direction.Normalize();
-//        std::cout << "Heijastuu " << std::endl;
         return new_direction;       
     }
 
     Vec3 new_direction = sin_refrac/sin_orig *(original_direction - orig_dot_n*unit_normal) + orig_dot_n*unit_normal;
     new_direction.Normalize();
 
-//    std::cout << "Taittuu " << std::endl;
     return new_direction;
-
 }
 
 #endif

@@ -27,7 +27,6 @@ void CameraSimple::GetImage(Environment& env, unsigned int spp) {
 	for (int j = 0; j < x_reso_; j++) {
 	    Vec3 ray_dest = tl_corner_ + (float(j)/float(x_reso_))*(tr_corner-tl_corner_) + (float(i)/float(y_reso_))*(bl_corner-tl_corner_);
 	    ray_dest.Normalize();
-		std::cout << ray_dest.X() << " " << ray_dest.Y() << " " << ray_dest.Z() << std::endl;
 	    for (unsigned int sample = 0; sample < spp; sample++) {
 		Ray ray = Ray(focal_point_, ray_dest);
 		while (!ray.IsFinished()) {
