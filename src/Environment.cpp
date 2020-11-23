@@ -98,7 +98,9 @@ void Environment::LoadEnvironment(std::string path, Material& material) {
             std::istringstream iss(line.substr(2));
             float x, y, z;
             iss>>x;iss>>y;iss>>z;
-            normals.push_back(Vec3(x,y,z));
+            Vec3 v = Vec3(x,y,z);
+            v.Normalize();
+            normals.push_back(v);
         }
     }
 
