@@ -34,7 +34,7 @@ Vec3 MaterialTransparent::Reflect(Vec3 original_direction, Vec3 unit_normal){
         if(sin_orig > 1/n2){
             Vec3 new_direction = original_direction - 2.0*unit_normal*orig_dot_n;  
             new_direction.Normalize();
-//            std::cout << "Kokonaisheijastuminen " << sin_orig << std::endl;
+//            std::cout << "Kokonaisheijastuminen " << sin_orig << std::endl; EI TOIMI
             return new_direction;
         }
     }
