@@ -67,7 +67,7 @@ std::tuple<float, float, float> Triangle::FindCollision(Ray& ray) const {
 
 Vec3 Triangle::GetNormalAt(Vec3& collision_point, float u, float v) {
   if (unit_normal_.IsZeroVector()) {
-    return u * n0_ + v * n1_ + (1-u-v) * n2_;
+    return (1-u-v) * n0_ + u * n1_ + v * n2_;
   }
   return unit_normal_;
 }

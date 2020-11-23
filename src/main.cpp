@@ -38,7 +38,7 @@ int main() {
     //    env.AddBody(&rad_tr2);
     */
     Environment env = Environment();
-    CameraSimple cam = CameraSimple(Vec3(-7,0,0), Vec3(4,-2,2), Vec3(4,2,-2), 100, 100);
+    CameraSimple cam = CameraSimple(Vec3(-7,0,0), Vec3(4,-2,2), Vec3(4,2,-2), 200, 200);
 
     MaterialSpecular radiant = MaterialSpecular(true, Color(1,1,1));
     Triangle rad_tr = Triangle(radiant, Vec3(-8,200,-200), Vec3(-8,200,0), Vec3(-8,0,-200));
@@ -49,6 +49,6 @@ int main() {
     env.LoadEnvironment("./sphere.obj", material);
     env.PrintInfo();
 
-    cam.GetImage(env,15);
+    cam.GetImage(env,3);
     return 0;
 }
