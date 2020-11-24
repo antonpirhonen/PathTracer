@@ -1,11 +1,12 @@
 CC = g++
 SRC = ./*.cpp ./*.hpp
+OPTS = -fopenmp
 
 all:
-	$(CC) -O3 $(SRC) -o ./main
+	$(CC) $(OPTS) -O3 $(SRC) -o ./main
 
 debug:
-	$(CC) -g $(SRC) -o ./main
+	$(CC) $(OPTS) -g $(SRC) -o ./main
 
 clean:
 	rm -f ./main
