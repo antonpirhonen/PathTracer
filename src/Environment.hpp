@@ -1,21 +1,24 @@
 #ifndef ENVIRONMENT_HPP
 #define ENVIRONMENT_HPP
 #include "Body.hpp"
+#include "Triangle.hpp"
+#include "Material.hpp"
 #include <vector>
 
 class Environment {
 
 public:
     Environment();
-    std::vector<Body*> const GetBodies() const;
-    void AddBody(Body*);
+    ~Environment();
+    std::vector<Triangle>& GetBodies();
+    void AddBody(Triangle&);
     void PrintInfo() const;
     void SaveEnvironment(std::string);
-    void LoadEnvironment(std::string);
+    void LoadEnvironment(std::string, Material&);
     void LoadBodyFromFile(std::string);
 
 private:
-    std::vector<Body*> bodies_ = { };
+    std::vector<Triangle> bodies_ = { };
     std::pair<float, float> x_range_;
     std::pair<float, float> y_range_;
     std::pair<float, float> z_range_;

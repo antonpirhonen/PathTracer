@@ -12,11 +12,11 @@
 #include "Color.hpp"
 
 int main() {
-    Environment env = Environment();
-    env.PrintInfo();
-    MaterialDiffuse diffuse = MaterialDiffuse(false, Color(0,0,0), Color(0.75,0,0.65), 0.01);
+    /*
+    MaterialDiffuse diffuse = MaterialDiffuse(false, Color(0,0,0), Color(1,0,0), 0.01);
+    MaterialDiffuse diffuse2 = MaterialDiffuse(false, Color(0,0,0), Color(0.9,0.9,0.9), 0.01);
     MaterialSpecular specular = MaterialSpecular(false, Color(0,0,0), Color(1,1,0));
-    MaterialSpecular radiant = MaterialSpecular(true, Color(1,1,1)); 
+    MaterialSpecular radiant = MaterialSpecular(true, Color(1,1,1));
     MaterialTransparent transparent = MaterialTransparent(false, Color(0,0,0), Color(1,0,0), 2);
     //Kaksi yksinkertaista testiä
     //Ensimmäinen
@@ -33,9 +33,22 @@ int main() {
     //    env.AddBody(&rad_tr);
     env.AddBody(&spec_tr);
     env.AddBody(&rad_tr);
+    Triangle background = Triangle(diffuse2, Vec3(40,-2,2), Vec3(60,-2,-3), Vec3(60,3,2));
+    env.AddBody(&background);
     //    env.AddBody(&rad_tr2);
+    */
+    Environment env = Environment();
+    CameraSimple cam = CameraSimple(Vec3(-7,0,0), Vec3(4,-2,2), Vec3(4,2,-2), 200, 200);
+
+    MaterialSpecular radiant = MaterialSpecular(true, Color(1,1,1));
+    Triangle rad_tr = Triangle(radiant, Vec3(-8,200,-200), Vec3(-8,200,0), Vec3(-8,0,-200));
+    Triangle rad_tr2 = Triangle(radiant, Vec3(-8,-200,200), Vec3(-8,200,0), Vec3(-8,0,-200));
+    env.AddBody(rad_tr);
+    env.AddBody(rad_tr2);
+    auto material = MaterialDiffuse(false, Color(0,0,0), Color(1,0,0), 0.3);
+    env.LoadEnvironment("./sphere.obj", material);
     env.PrintInfo();
 
-    cam.GetImage(env,10);
+    cam.GetImage(env,3);
     return 0;
 }
