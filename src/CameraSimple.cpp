@@ -72,7 +72,8 @@ void CameraSimple::GetImage(Environment& env, unsigned int spp) {
 	    } // sample
 	} // j
     } // i
-    image.Draw();
+    image.DrawPpm();
+	image.DrawPng();
 }
 
 
