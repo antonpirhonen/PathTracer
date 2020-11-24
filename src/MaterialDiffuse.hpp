@@ -1,3 +1,5 @@
+#ifndef DIFFUSE_HPP
+#define DIFFUSE_HPP
 #include "structs.hpp"
 #include "Material.hpp"
 
@@ -11,3 +13,5 @@ public:
 private:
     float mattness_;
 };
+
+#endif

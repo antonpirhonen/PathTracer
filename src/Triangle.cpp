@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include "Triangle.hpp"
 #include <iostream>
 

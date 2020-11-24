@@ -63,6 +63,7 @@ float Vec3::Norm() {
 Vec3 Vec3::Reverse() const {
   return Vec3(- x_, - y_, - x_);
 }
+
 bool Vec3::IsZeroVector() {
   return x_ == 0 && y_ == 0 && z_ == 0;
 }
