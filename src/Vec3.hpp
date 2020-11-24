@@ -1,5 +1,6 @@
 #ifndef VEC3_HPP
 #define VEC3_HPP
+#include <iostream>
 
 class Vec3 {
 
@@ -42,7 +43,9 @@ public:
   Vec3 CrossProduct(Vec3& v);
   float Norm();
   Vec3 Reverse() const;
-  
+  bool IsZeroVector();
+  friend std::ostream& operator<<(std::ostream& os, Vec3& v);
+
 private:
   
     float x_, y_, z_;

@@ -1,5 +1,3 @@
-#ifndef VEC3_CPP
-#define VEC3_CPP
 #include "Vec3.hpp"
 #include <cmath>
 
@@ -66,4 +64,11 @@ Vec3 Vec3::Reverse() const {
   return Vec3(- x_, - y_, - x_);
 }
 
-#endif
+bool Vec3::IsZeroVector() {
+  return x_ == 0 && y_ == 0 && z_ == 0;
+}
+
+std::ostream& operator<<(std::ostream& os, Vec3& v) {
+  os << "x: " << v.x_ << ", y: " << v.y_ << ", z: " << v.z_ << std::endl;
+  return os;
+}

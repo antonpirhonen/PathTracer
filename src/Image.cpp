@@ -2,6 +2,10 @@
 #include <ostream>
 #include <fstream>
 
+#define STB_IMAGE_WRITE_IMPLEMENTATION
+#include "stb_image_write.hpp"
+
+
 Color* Image::GetPtrToPixel(int i, int j) {
     return &colors_[i*width_ + j];
 }
@@ -23,7 +27,7 @@ static std::string Time() {
     return ret;
 }
 
-void Image::Draw() const {
+void Image::DrawPpm() const {
     std::ofstream ofs(Time()+".ppm", std::ios_base::out | std::ios_base::binary);
     ofs << "P6" << std::endl << width_ << " " << height_ << std::endl
 	<< "255" << std::endl;
@@ -35,3 +39,25 @@ void Image::Draw() const {
     }
     ofs.close();
 }
+
+void Image::DrawPng() const {
+
+    auto name = Time() + ".png";
+
+    uint8_t* pixels = new uint8_t[width_ * height_ * 3];
+
+    auto index = 0;
+
+    for (size_t i = 0; i < colors_.size(); i++) {
+        std::tuple<int, int, int> rgb = colors_[i].GetComponents255();
+        pixels[index++] = static_cast<unsigned char>(std::get<0>(rgb));
+        pixels[index++] = static_cast<unsigned char>(std::get<1>(rgb));
+        pixels[index++] = static_cast<unsigned char>(std::get<2>(rgb));
+    }
+
+    stbi_write_png(name.c_str(), width_, height_, 3, pixels, width_  * 3);
+
+    delete[] pixels;
+
+}
+ 
