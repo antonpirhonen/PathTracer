@@ -1,3 +1,6 @@
+#ifndef SPECULAR_HPP
+#define SPECULAR_HPP
+
 #include "structs.hpp"
 #include "Material.hpp"
 
@@ -11,3 +14,5 @@ public:
 private:
 
 };
+
+#endif
