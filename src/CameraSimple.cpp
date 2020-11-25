@@ -16,13 +16,23 @@ void CameraSimple::GetImage(Environment& env, unsigned int spp) {
     Image image(y_reso_, x_reso_);
     std::vector<Triangle> bodies = env.GetBodies();
 
+    // for (auto tr : bodies) {
+    //     {
+    //         std::cout << "Is Luminous: " << (tr.GetMaterial().GetLuminosity() ? "true" : "false") << std::endl;
+    //         auto c = tr.GetMaterial().GetColor();
+    //         auto cr = tr.GetMaterial().GetColorRem();
+    //         std::cout << c;
+    //         std::cout << "Color Removal" << cr;
+    //     }
+    // }
+
     Vec3 tr_corner = Vec3{br_corner_.X(), br_corner_.Y(), tl_corner_.Z()};
     Vec3 bl_corner = Vec3{tl_corner_.X(), tl_corner_.Y(), br_corner_.Z()};
     size_t n;
     size_t m;
 
     // Uncomment the next expression to distribute the computation across all available CPU cores
-    #pragma omp parallel for
+    //#pragma omp parallel for
     for (int i = 0; i < y_reso_; i++) {
 	for (int j = 0; j < x_reso_; j++) {
 	    Vec3 ray_dest = tl_corner_ + (float(j)/float(x_reso_))*(tr_corner-tl_corner_) + (float(i)/float(y_reso_))*(bl_corner-tl_corner_);

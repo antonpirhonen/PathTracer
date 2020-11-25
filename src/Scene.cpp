@@ -33,6 +33,7 @@ void Scene::parseScene(std::string fileName) {
     std::cout << "Added camera!" << std::endl;
 
     Environment sceneEnv = Environment();
+    std::vector<MaterialSpecular> materials = { };
 
     for (auto light : scene["lights"]) {
 
@@ -41,16 +42,23 @@ void Scene::parseScene(std::string fileName) {
             Color lightColor = parseColor(light["color"]);
 
             auto radiant = MaterialSpecular(true, lightColor);
-
+            materials.push_back(radiant);
+            
             auto vertices = light["vertices"];
 
             auto vertice1 = parseVector(vertices["1"]);
             auto vertice2 = parseVector(vertices["2"]);
             auto vertice3 = parseVector(vertices["3"]);
 
-            auto light = Triangle(radiant, vertice1, vertice2, vertice3);
+            auto light = Triangle(materials.back(), vertice1, vertice2, vertice3);
 
             std::cout << "Added light!" << std::endl;
+            auto c = light.GetMaterial().GetColor();
+            auto cr = light.GetMaterial().GetColorRem();
+            std::cout << "Is Luminous: " << (light.GetMaterial().GetLuminosity() ? "true" : "false") << std::endl;
+            std::cout << c;
+            std::cout << "Color Removal" << cr;
+            std::cout << "--- Original ---" << std::endl;
 
             sceneEnv.AddBody(light);
         }
@@ -60,72 +68,39 @@ void Scene::parseScene(std::string fileName) {
     for (auto object : scene["objects"]) {
 
         if (object["type"] == "triangle") {
-
             auto material = object["material"];
-
             // Liikaa toistoa?? Saisiko jotenkin vähennettyä??
+                auto materialColor = parseColor(material["color"]);
+                auto materialColorRem = parseColor(material["colorRem"]);
             
             if (material["type"] == "specular")
             {
-
-                auto materialColor = parseColor(material["color"]);
-
-                auto materialColorRem = parseColor(material["colorRem"]);
-
                 auto specular = MaterialSpecular(false, materialColor, materialColorRem);
-
                 auto vertices = object["vertices"];
-
                 auto obj = Triangle(specular, parseVector(vertices["1"]), parseVector(vertices["2"]), parseVector(vertices["3"]));
-
                 std::cout << "Added specular triangle!" << std::endl;
-
                 sceneEnv.AddBody(obj);
 
             } else if (material["type"] == "diffuse")
             {
-                
-                auto materialColor = parseColor(material["color"]);
-
-                auto materialColorRem = parseColor(material["colorRem"]);
-
                 auto materialMattness = material["mattness"];
-
                 auto diffuse = MaterialDiffuse(false, materialColor, materialColorRem, materialMattness);
-
                 auto vertices = object["vertices"];
-
                 auto obj = Triangle(diffuse, parseVector(vertices["1"]), parseVector(vertices["2"]), parseVector(vertices["3"]));
-
                 std::cout << "Added diffuse triangle!" << std::endl;
-
                 sceneEnv.AddBody(obj);
 
             } else if (material["type"] == "transparent")
             {
-                
-                auto materialColor = parseColor(material["color"]);
-
-                auto materialColorRem = parseColor(material["colorRem"]);
-
                 auto materialRefIndex = material["refIndex"];
-
                 auto transparent = MaterialTransparent(false, materialColor, materialColorRem, materialRefIndex);
-
                 auto vertices = object["vertices"];
-
                 auto obj = Triangle(transparent, parseVector(vertices["1"]), parseVector(vertices["2"]), parseVector(vertices["3"]));
-
                 std::cout << "Added transparent triangle!" << std::endl;
-
                 sceneEnv.AddBody(obj);
-
             }           
-
         } else if (object["type"] == "mesh") {
-
             auto material = object["material"];
-
             // Liikaa toistoa?? Saisiko jotenkin vähennettyä??
             
             if (material["type"] == "specular")
@@ -184,7 +159,14 @@ void Scene::parseScene(std::string fileName) {
     }
 
     sceneEnv.PrintInfo();
+    // for (auto tr : sceneEnv.GetBodies()) {
+    //     std::cout << "Is Luminous: " << (tr.GetMaterial().GetLuminosity() ? "true" : "false") << std::endl;
+    //     auto c = tr.GetMaterial().GetColor();
+    //     auto cr = tr.GetMaterial().GetColorRem();
+    //     std::cout << c;
+    //     std::cout << "Color Removal" << cr;
+    // }
 
-    parsedCamera.GetImage(sceneEnv, 10);
+    parsedCamera.GetImage(sceneEnv, 1);
 
 }
