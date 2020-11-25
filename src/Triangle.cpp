@@ -3,10 +3,10 @@
 #include "Triangle.hpp"
 #include <iostream>
 
-Triangle::Triangle(Material& material, Vec3 v0, Vec3 v1, Vec3 v2, Vec3 n0, Vec3 n1, Vec3 n2)
+Triangle::Triangle(Material* material, Vec3 v0, Vec3 v1, Vec3 v2, Vec3 n0, Vec3 n1, Vec3 n2)
   : Body(material), v0_(v0), v1_(v1), v2_(v2), n0_(n0), n1_(n1), n2_(n2) { }
 
-Triangle::Triangle(Material& material, Vec3 v0, Vec3 v1, Vec3 v2)
+Triangle::Triangle(Material* material, Vec3 v0, Vec3 v1, Vec3 v2)
   : Body(material), v0_(v0), v1_(v1), v2_(v2) {
     auto v3 = v2 - v0;
     auto normal = (v1 - v0).CrossProduct(v3);
@@ -16,14 +16,14 @@ Triangle::Triangle(Material& material, Vec3 v0, Vec3 v1, Vec3 v2)
 
 
 void Triangle::Reflect(Ray &ray, Vec3 &new_origin, float u, float v) {
-  if (material_.GetLuminosity()){
+  if (material_->GetLuminosity()){
     ray.SetFinished();  
-    ray.RemoveColor(material_.GetColor());
+    ray.RemoveColor(material_->GetColor());
   }
   else {
-    ray.RemoveColor(material_.GetColorRem());
+    ray.RemoveColor(material_->GetColorRem());
     ray.SetNewOrigin(new_origin);
-    Vec3 new_direction = material_.Reflect(ray.GetDirection(), GetNormalAt(new_origin, u, v));
+    Vec3 new_direction = material_->Reflect(ray.GetDirection(), GetNormalAt(new_origin, u, v));
     ray.SetNewDirection(new_direction);
   }
 }

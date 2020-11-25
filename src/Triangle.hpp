@@ -7,8 +7,8 @@
 class Triangle : public Body {
 
 public:
-    Triangle(Material& material, Vec3 v0, Vec3 v1, Vec3 v2);
-    Triangle(Material& material, Vec3 v0, Vec3 v1, Vec3 v2, Vec3 n0, Vec3 n1, Vec3 n2);
+    Triangle(Material* material, Vec3 v0, Vec3 v1, Vec3 v2);
+    Triangle(Material* material, Vec3 v0, Vec3 v1, Vec3 v2, Vec3 n0, Vec3 n1, Vec3 n2);
 
     Triangle(Triangle& tr) : Body(tr.material_) {
         v0_ = tr.v0_;
