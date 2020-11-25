@@ -23,7 +23,6 @@ void Scene::parseScene(std::string fileName) {
     file.close();
 
     auto cameraInfo = scene["camera"];
-
     auto focalPoint = parseVector(cameraInfo["focalPoint"]);
     auto tlCorner = parseVector(cameraInfo["tlCorner"]);
     auto brCorner = parseVector(cameraInfo["brCorner"]);
@@ -35,126 +34,84 @@ void Scene::parseScene(std::string fileName) {
     Environment sceneEnv = Environment();
     std::vector<MaterialSpecular> materials = { };
 
-    for (auto light : scene["lights"]) {
+    for (auto material : scene["materials"]) {
 
-        if  (light["type"] == "triangle") {
+        if (material["type"] == "specular")
+            {
+                auto materialColor = parseColor(material["color"]);
+                auto materialColorRem = parseColor(material["colorRem"]);
+                auto materialIsLuminous = material["isLuminous"];
+                auto specular = MaterialSpecular(materialIsLuminous, materialColor, materialColorRem);
+                materials.push_back(specular);
+                auto m = materials.back();
+                std::cout << "Is Luminous: " << (m.GetLuminosity() ? "true" : "false") << std::endl;
+                auto c = m.GetColor();
+                auto cr = m.GetColorRem();
+                std::cout << c;
+                std::cout << "Color Removal" << cr;
 
-            Color lightColor = parseColor(light["color"]);
+            } else if (material["type"] == "diffuse")
+            {
+                auto materialColor = parseColor(material["color"]);
+                auto materialColorRem = parseColor(material["colorRem"]);
+                auto materialMattness = material["mattness"];
+                auto materialIsLuminous = material["isLuminous"];
+                auto diffuse = MaterialDiffuse(materialIsLuminous, materialColor, materialColorRem, materialMattness);
+                //lisää materiaali
 
-            auto radiant = MaterialSpecular(true, lightColor);
-            materials.push_back(radiant);
-            
-            auto vertices = light["vertices"];
+            } else if (material["type"] == "transparent")
+            {
+                auto materialColor = parseColor(material["color"]);
+                auto materialColorRem = parseColor(material["colorRem"]);
+                auto materialRefIndex = material["refIndex"];
+                auto materialIsLuminous = material["isLuminous"];
+                auto transparent = MaterialTransparent(materialIsLuminous, materialColor, materialColorRem, materialRefIndex);
 
-            auto vertice1 = parseVector(vertices["1"]);
-            auto vertice2 = parseVector(vertices["2"]);
-            auto vertice3 = parseVector(vertices["3"]);
+                // lisää materiaali
 
-            auto light = Triangle(materials.back(), vertice1, vertice2, vertice3);
-
-            std::cout << "Added light!" << std::endl;
-            auto c = light.GetMaterial().GetColor();
-            auto cr = light.GetMaterial().GetColorRem();
-            std::cout << "Is Luminous: " << (light.GetMaterial().GetLuminosity() ? "true" : "false") << std::endl;
-            std::cout << c;
-            std::cout << "Color Removal" << cr;
-            std::cout << "--- Original ---" << std::endl;
-
-            sceneEnv.AddBody(light);
-        }
+            } 
 
     }
 
-    for (auto object : scene["objects"]) {
+for (auto object : scene["objects"]) {
 
         if (object["type"] == "triangle") {
-            auto material = object["material"];
-            // Liikaa toistoa?? Saisiko jotenkin vähennettyä??
-                auto materialColor = parseColor(material["color"]);
-                auto materialColorRem = parseColor(material["colorRem"]);
-            
-            if (material["type"] == "specular")
-            {
-                auto specular = MaterialSpecular(false, materialColor, materialColorRem);
-                auto vertices = object["vertices"];
-                auto obj = Triangle(specular, parseVector(vertices["1"]), parseVector(vertices["2"]), parseVector(vertices["3"]));
-                std::cout << "Added specular triangle!" << std::endl;
-                sceneEnv.AddBody(obj);
 
-            } else if (material["type"] == "diffuse")
-            {
-                auto materialMattness = material["mattness"];
-                auto diffuse = MaterialDiffuse(false, materialColor, materialColorRem, materialMattness);
-                auto vertices = object["vertices"];
-                auto obj = Triangle(diffuse, parseVector(vertices["1"]), parseVector(vertices["2"]), parseVector(vertices["3"]));
-                std::cout << "Added diffuse triangle!" << std::endl;
-                sceneEnv.AddBody(obj);
+                auto comment = object["comment"];
 
-            } else if (material["type"] == "transparent")
-            {
-                auto materialRefIndex = material["refIndex"];
-                auto transparent = MaterialTransparent(false, materialColor, materialColorRem, materialRefIndex);
                 auto vertices = object["vertices"];
-                auto obj = Triangle(transparent, parseVector(vertices["1"]), parseVector(vertices["2"]), parseVector(vertices["3"]));
-                std::cout << "Added transparent triangle!" << std::endl;
-                sceneEnv.AddBody(obj);
-            }           
+
+                auto materialIndex = object["materialIndex"];
+
+                // hae materiaali materialIndexistä
+                // auto material = ???
+
+                // luo kolmio
+                //auto obj = Triangle(material, parseVector(vertices["1"]), parseVector(vertices["2"]), parseVector(vertices["3"]));
+
+                //lisää kolmio
+                //sceneEnv.AddBody(obj);
+
+                std::cout << "Added triangle shaped object!, Comment: " << comment << std::endl;           
+
         } else if (object["type"] == "mesh") {
-            auto material = object["material"];
-            // Liikaa toistoa?? Saisiko jotenkin vähennettyä??
-            
-            if (material["type"] == "specular")
-            {
 
-                auto materialColor = parseColor(material["color"]);
-
-                auto materialColorRem = parseColor(material["colorRem"]);
-
-                auto specular = MaterialSpecular(false, materialColor, materialColorRem);
-
-                auto objPath = object["path"]; 
-
-                std::cout << "Added specular mesh!" << std::endl;
-
-                sceneEnv.LoadEnvironment(objPath, specular);
-
-            } else if (material["type"] == "diffuse")
-            {
                 
-                auto materialColor = parseColor(material["color"]);
+                auto comment = object["comment"];
 
-                auto materialColorRem = parseColor(material["colorRem"]);
+                auto materialIndex = object["materialIndex"];
 
-                auto materialMattness = material["mattness"];
-
-                MaterialDiffuse diffuse = MaterialDiffuse(false, materialColor, materialColorRem, materialMattness);
-
-                auto objPath = object["path"]; 
-
-                std::cout << "Added diffuse mesh!" << std::endl;
-
-                sceneEnv.LoadEnvironment(objPath, diffuse);
-
-            } else if (material["type"] == "transparent")
-            {
-                
-                auto materialColor = parseColor(material["color"]);
-
-                auto materialColorRem = parseColor(material["colorRem"]);
-
-                auto materialRefIndex = material["refIndex"];
-
-                auto transparent = MaterialTransparent(false, materialColor, materialColorRem, materialRefIndex);
+                // hae materiaali materialIndexistä
+                auto material = materials.at(materialIndex);
 
                 auto objPath = object["path"]; 
 
-                std::cout << "Added transparent mesh!" << std::endl;
+                std::cout << "Added mesh object!, Comment: " << comment << std::endl;
 
-                sceneEnv.LoadEnvironment(objPath, transparent);
+                //lataa .obj 
+                sceneEnv.LoadEnvironment(objPath, material);
 
-            }
-
-        }
+        } 
 
     }
 

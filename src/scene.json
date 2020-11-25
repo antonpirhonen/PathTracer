@@ -18,59 +18,29 @@
 		"xReso": 200,
 		"yReso": 200
 	},
-	"lights": [
+	"materials": [
 		{
-			"type": "triangle",
+			"comment": "Light source",
+			"type": "specular",
 			"color": {
-				"r": 1,
-				"g": 1,
+				"r": 0,
+				"g": 0,
 				"b": 1
 			},
-			"vertices": {
-				"1": {
-					"x": 8,
-					"y": 200,
-					"z": -200
-				},
-				"2": {
-					"x": 8,
-					"y": 200,
-					"z": 0
-				},
-				"3": {
-					"x": 8,
-					"y": 0,
-					"z": -200
-				}
-			}
-		},
-		{
-			"type": "triangle",
-			"color": {
-				"r": 1,
-				"g": 1,
-				"b": 1
+			"colorRem": {
+				"r": 0,
+				"g": 0,
+				"b": 0
 			},
-			"vertices": {
-				"1": {
-					"x": 8,
-					"y": -200,
-					"z": 200
-				},
-				"2": {
-					"x": 8,
-					"y": 200,
-					"z": 0
-				},
-				"3": {
-					"x": 8,
-					"y": 0,
-					"z": -200
-				}
-			}
+			"isLuminous": true
 		}
 	],
 	"objects": [
-
+		{
+			"comment": "Big wall of light",
+			"type": "mesh",
+			"path": "./lights.obj",
+			"materialIndex": 0
+		}
 	]
 }
