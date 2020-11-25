@@ -20,14 +20,13 @@ using json = nlohmann::json;
 
 class Scene {
 public:
-    Scene() {
-    }
+    Scene() { }
 
-    void parseScene(std::string fileName);
+    void DrawImageFrom(std::string fileName);
 
 private:
-    Vec3 parseVector(json &vector);
-    Color parseColor(json &color);
+    Vec3 ParseVector(json &vector);
+    Color ParseColor(json &color);
 
 };
 

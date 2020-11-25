@@ -3,7 +3,7 @@
 int main() {
     
     Scene scene = Scene();
-    scene.parseScene("./scene.json");
+    scene.DrawImageFrom("./scene.json");
     
     return 0;
 }
