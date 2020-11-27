@@ -1,0 +1,99 @@
+{
+	"camera": {
+		"focalPoint": {
+			"x": -7,
+			"y": 0,
+			"z": 0
+		},
+		"tlCorner": {
+			"x": 4,
+			"y": -2,
+			"z": 2
+		},
+		"brCorner": {
+			"x": 4,
+			"y": 2,
+			"z": -2
+		},
+		"xReso": 200,
+		"yReso": 200
+	},
+	"materials": [
+		{
+			"comment": "Light source",
+			"type": "specular",
+			"color": {
+				"r": 1,
+				"g": 1,
+				"b": 1
+			},
+			"colorRem": {
+				"r": 1,
+				"g": 1,
+				"b": 1
+			},
+			"isLuminous": true
+		},
+		{
+			"comment": "Red diffuse",
+			"type": "diffuse",
+			"mattness": 0.2,
+			"color": {
+				"r": 1,
+				"g": 0,
+				"b": 0
+			},
+			"colorRem": {
+				"r": 1,
+				"g": 0,
+				"b": 0
+			},
+			"isLuminous": false
+		},
+		{
+			"comment": "Transparent",
+			"type": "transparent",
+			"refIndex": 0.5,
+			"color": {
+				"r": 1,
+				"g": 0,
+				"b": 0
+			},
+			"colorRem": {
+				"r": 1,
+				"g": 0,
+				"b": 0
+			},
+			"isLuminous": false
+		},
+		{
+			"comment": "Specular",
+			"type": "specular",
+			"color": {
+				"r": 1,
+				"g": 0,
+				"b": 0
+			},
+			"colorRem": {
+				"r": 1,
+				"g": 0,
+				"b": 0
+			},
+			"isLuminous": false
+		}
+	],
+	"objects": [
+		{
+			"comment": "Big wall of light",
+			"type": "mesh",
+			"path": "./lights.obj",
+			"materialIndex": 0
+		},
+		{
+			"comment": "Red ball",
+			"type": "mesh",
+			"path": "./sphere.obj",
+			"materialIndex": 3
+		}
+	]
+}

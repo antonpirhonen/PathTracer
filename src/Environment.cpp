@@ -9,9 +9,9 @@
 
 Environment::Environment() { }
 Environment::~Environment() {
-    // for (auto body : bodies_) {
-    //     delete body;
-    // }
+    for (auto material : materials_) {
+        delete material;
+    }
 }
 
 std::vector<Triangle>& Environment::GetBodies() {
@@ -20,6 +20,14 @@ std::vector<Triangle>& Environment::GetBodies() {
 
 void Environment::AddBody(Triangle& body) {
     bodies_.push_back(body);
+}
+
+void Environment::AddMaterial(Material* material) {
+    materials_.push_back(material);
+}
+
+Material* Environment::MaterialAt(int i) {
+    return materials_.at(i);
 }
 
 void Environment::PrintInfo() const {
@@ -53,7 +61,7 @@ std::vector<std::string> Split(std::string str, char c) {
 }
 
 
-void Environment::LoadEnvironment(std::string path, Material& material) {
+void Environment::LoadEnvironment(std::string path, Material* material) {
     std::ifstream file (path);
     if (!file.is_open()) {
         std::cout << ".obj file " << path <<" not found" << std::endl;

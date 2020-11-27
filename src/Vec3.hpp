@@ -9,6 +9,11 @@ public:
   Vec3(float x, float y, float z) : x_(x), y_(y), z_(z) { }
   Vec3() : x_(0), y_(0), z_(0) { }
 
+  Vec3(Vec3& v) {x_ = v.x_; y_ = v.y_; z_ = v.z_;}
+  Vec3(const Vec3& v) {x_ = v.x_; y_ = v.y_; z_ = v.z_;}
+  Vec3 operator=(Vec3& v) {x_ = v.x_; y_ = v.y_; z_ = v.z_; return *this;}
+  Vec3 operator=(const Vec3& v) {x_ = v.x_; y_ = v.y_; z_ = v.z_; return *this;}
+
   float X() const;
   float Y() const;
   float Z() const;

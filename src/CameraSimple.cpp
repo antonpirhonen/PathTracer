@@ -29,7 +29,7 @@ void CameraSimple::GetImage(Environment& env, unsigned int spp) {
 	    ray_dest.Normalize();
 	    for (unsigned int sample = 0; sample < spp; sample++) {
 		Ray ray = Ray(focal_point_, ray_dest);
-        std::cout << i << std::endl;
+        //std::cout << i << std::endl;
         while (!ray.IsFinished()) {
             std::tuple<float, float, float> min_distance = std::make_tuple(1000000, -1, -1);
             std::tuple<float, float, float> temp_distance = std::make_tuple(0,0,0);
@@ -72,7 +72,7 @@ void CameraSimple::GetImage(Environment& env, unsigned int spp) {
 	    } // sample
 	} // j
     } // i
-    image.DrawPpm();
+
 	image.DrawPng();
 }
 

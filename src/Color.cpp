@@ -51,3 +51,8 @@ Color Color::operator / (const float c) const {
 		 g_ / c,
 		 b_ / c);
 }
+
+std::ostream& operator<<(std::ostream& os, Color& c) {
+  os << "r: " << c.r_ << ", g: " << c.g_ << ", b: " << c.b_ << std::endl;
+  return os;
+}
