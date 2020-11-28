@@ -46,7 +46,7 @@ Vec3 Vec3::operator / (const Vec3& v) const {
     return Vec3(x_ / v.X(), y_ / v.Y(), z_ / v.Z());
 }
 Vec3 Vec3::operator / (float c) const {
-    return Vec3(c / x_, c / y_, c / z_);
+    return Vec3(x_ / c, y_ / c, z_ / c);
 }
 Vec3 operator / (float c, const Vec3& v) {
     return Vec3(c / v.X(), c / v.Y(), c / v.Z());
@@ -61,7 +61,7 @@ float Vec3::Norm() {
     return sqrt(x_*x_ + y_*y_ + z_*z_);
 }
 Vec3 Vec3::Reverse() const {
-    return Vec3(- x_, - y_, - x_);
+    return Vec3(- x_, - y_, - z_);
 }
 
 bool Vec3::IsZeroVector() {

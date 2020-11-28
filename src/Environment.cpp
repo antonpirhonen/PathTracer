@@ -75,22 +75,22 @@ static std::tuple<Vec3, Vec3> BoundingBox(std::vector<Triangle>& triangles) {
 	mincoords[0] = (mincoords[0] < v0.X()) ? mincoords[0] : v0.X();
 	mincoords[0] = (mincoords[0] < v1.X()) ? mincoords[0] : v1.X();
 	mincoords[0] = (mincoords[0] < v2.X()) ? mincoords[0] : v2.X();
-	mincoords[1] = (mincoords[1] < v0.X()) ? mincoords[1] : v0.X();
-	mincoords[1] = (mincoords[1] < v1.X()) ? mincoords[1] : v1.X();
-	mincoords[1] = (mincoords[1] < v2.X()) ? mincoords[1] : v2.X();
-	mincoords[2] = (mincoords[2] < v0.X()) ? mincoords[2] : v0.X();
-	mincoords[2] = (mincoords[2] < v1.X()) ? mincoords[2] : v1.X();
-	mincoords[2] = (mincoords[2] < v2.X()) ? mincoords[2] : v2.X();
+	mincoords[1] = (mincoords[1] < v0.Y()) ? mincoords[1] : v0.Y();
+	mincoords[1] = (mincoords[1] < v1.Y()) ? mincoords[1] : v1.Y();
+	mincoords[1] = (mincoords[1] < v2.Y()) ? mincoords[1] : v2.Y();
+	mincoords[2] = (mincoords[2] < v0.Z()) ? mincoords[2] : v0.Z();
+	mincoords[2] = (mincoords[2] < v1.Z()) ? mincoords[2] : v1.Z();
+	mincoords[2] = (mincoords[2] < v2.Z()) ? mincoords[2] : v2.Z();
 
 	maxcoords[0] = (maxcoords[0] > v0.X()) ? maxcoords[0] : v0.X();
 	maxcoords[0] = (maxcoords[0] > v1.X()) ? maxcoords[0] : v1.X();
 	maxcoords[0] = (maxcoords[0] > v2.X()) ? maxcoords[0] : v2.X();
-	maxcoords[1] = (maxcoords[1] > v0.X()) ? maxcoords[1] : v0.X();
-	maxcoords[1] = (maxcoords[1] > v1.X()) ? maxcoords[1] : v1.X();
-	maxcoords[1] = (maxcoords[1] > v2.X()) ? maxcoords[1] : v2.X();
-	maxcoords[2] = (maxcoords[2] > v0.X()) ? maxcoords[2] : v0.X();
-	maxcoords[2] = (maxcoords[2] > v1.X()) ? maxcoords[2] : v1.X();
-	maxcoords[2] = (maxcoords[2] > v2.X()) ? maxcoords[2] : v2.X();
+	maxcoords[1] = (maxcoords[1] > v0.Y()) ? maxcoords[1] : v0.Y();
+	maxcoords[1] = (maxcoords[1] > v1.Y()) ? maxcoords[1] : v1.Y();
+	maxcoords[1] = (maxcoords[1] > v2.Y()) ? maxcoords[1] : v2.Y();
+	maxcoords[2] = (maxcoords[2] > v0.Z()) ? maxcoords[2] : v0.Z();
+	maxcoords[2] = (maxcoords[2] > v1.Z()) ? maxcoords[2] : v1.Z();
+	maxcoords[2] = (maxcoords[2] > v2.Z()) ? maxcoords[2] : v2.Z();
     }
     return std::make_tuple(Vec3(mincoords[0], mincoords[1], mincoords[2]),
 			   Vec3(maxcoords[0], maxcoords[1], maxcoords[2]));
@@ -151,26 +151,27 @@ void Environment::LoadMesh(std::string path, Material* material,
     }
 
     // Rotate:
-    for (auto tr : triangles) {
+    for (auto &tr : triangles) {
 	tr.RotateAroundXAxisBy(xrot);
 	tr.RotateAroundYAxisBy(yrot);
 	tr.RotateAroundZAxisBy(zrot);
     }
     // Move to origin:
-    auto bb = BoundingBox(triangles);
-    Vec3 mid = (std::get<0>(bb) + std::get<1>(bb)) / 2;
+    std::tuple<Vec3, Vec3> bb = BoundingBox(triangles);
+    Vec3 mid = (std::get<0>(bb) + std::get<1>(bb));
+    mid = mid / 2;
     Vec3 d = mid.Reverse();
-    for (auto tr : triangles) {
+    for (auto &tr : triangles) {
 	tr.MoveBy(d);
     }
     // Scale:
     float current_height = (std::get<1>(bb) - std::get<0>(bb)).Z();
     float ratio = height / current_height;
-    for (auto tr : triangles) {
+    for (auto &tr : triangles) {
 	tr.ScaleBy(ratio);
     }
     // Move away from origin:
-    for (auto tr : triangles) {
+    for (auto &tr : triangles) {
 	tr.MoveBy(midpoint);
     }
     // Append to bodies_:

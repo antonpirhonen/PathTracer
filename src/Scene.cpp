@@ -78,5 +78,5 @@ for (auto object : scene["objects"]) {
     }
 
     sceneEnv.PrintInfo();
-    parsedCamera.GetImage(sceneEnv, 1);
+    parsedCamera.GetImage(sceneEnv, 10);
 }
