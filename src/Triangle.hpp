@@ -51,9 +51,17 @@ public:
         return *this;
     }
 
+    std::tuple<Vec3, Vec3, Vec3> GetVertices() { return std::make_tuple(v0_, v1_, v2_); }
+    
     std::tuple<float, float, float> FindCollision(Ray &ray) const;
     void Reflect(Ray &ray, Vec3 &new_origin, float, float);
     Vec3 GetNormalAt(Vec3&, float, float);
+
+    void MoveBy(Vec3& v);
+    void ScaleBy(float c);
+    void RotateAroundXAxisBy(float deg);
+    void RotateAroundYAxisBy(float deg);
+    void RotateAroundZAxisBy(float deg);
 
 private:
     Vec3 v0_;

@@ -74,3 +74,32 @@ Vec3 Triangle::GetNormalAt(Vec3& collision_point, float u, float v) {
   return unit_normal_;
 }
 
+void Triangle::MoveBy(Vec3& v) {
+    v0_ = v0_ + v;
+    v1_ = v1_ + v;
+    v2_ = v2_ + v;
+}
+
+void Triangle::ScaleBy(float c) {
+    v0_ = v0_ * c;
+    v1_ = v1_ * c;
+    v2_ = v2_ * c;
+}
+
+void Triangle::RotateAroundXAxisBy(float deg) {
+    v0_ = v0_.RotateAroundXAxis(deg);
+    v1_ = v1_.RotateAroundXAxis(deg);
+    v2_ = v2_.RotateAroundXAxis(deg);
+}
+
+void Triangle::RotateAroundYAxisBy(float deg) {
+    v0_ = v0_.RotateAroundYAxis(deg);
+    v1_ = v1_.RotateAroundYAxis(deg);
+    v2_ = v2_.RotateAroundYAxis(deg);
+}
+
+void Triangle::RotateAroundZAxisBy(float deg) {
+    v0_ = v0_.RotateAroundZAxis(deg);
+    v1_ = v1_.RotateAroundZAxis(deg);
+    v2_ = v2_.RotateAroundZAxis(deg);
+}

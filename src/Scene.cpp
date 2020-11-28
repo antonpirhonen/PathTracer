@@ -66,9 +66,14 @@ for (auto object : scene["objects"]) {
                 auto comment = object["comment"];
                 auto materialIndex = object["materialIndex"];
                 auto material = sceneEnv.MaterialAt(materialIndex);
-                auto objPath = object["path"]; 
+		auto midpoint = ParseVector(object["midpoint"]);
+		auto height = object["height"];
+		auto xrot = object["xrot"];
+		auto yrot = object["yrot"];
+		auto zrot = object["zrot"];
+                auto objPath = object["path"];
                 std::cout << "Added mesh object!, Comment: " << comment << std::endl;
-                sceneEnv.LoadEnvironment(objPath, material);
+                sceneEnv.LoadMesh(objPath, material, midpoint, height, xrot, yrot, zrot);
         } 
     }
 
