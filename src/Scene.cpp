@@ -1,4 +1,5 @@
 #include "Scene.hpp"
+#include <filesystem>
 
 Vec3 Scene::ParseVector(json &vector) {
     std::cout << "Parsed vector: " << vector["x"] << ", " << vector["y"] << ", " << vector["z"] << std::endl;
@@ -73,7 +74,11 @@ for (auto object : scene["objects"]) {
 		auto zrot = object["zrot"];
                 auto objPath = object["path"];
                 std::cout << "Added mesh object!, Comment: " << comment << std::endl;
-                sceneEnv.LoadMesh(objPath, material, midpoint, height, xrot, yrot, zrot);
+
+		std::filesystem::path p = fileName;
+		std::string meshdir = p.remove_filename().string();
+                sceneEnv.LoadMesh(meshdir, objPath, material, midpoint, height, xrot, yrot, zrot);
+
         } 
     }
 

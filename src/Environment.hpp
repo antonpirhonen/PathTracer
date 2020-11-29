@@ -15,7 +15,7 @@ public:
     void AddMaterial(Material*);
     Material* MaterialAt(int);
     void PrintInfo() const;
-    void LoadMesh(std::string path, Material* material,
+    void LoadMesh(std::string dir, std::string filename, Material* material,
 		  Vec3 midpoint, float height,
 		  float xrot, float yrot, float zrot);
 

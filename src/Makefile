@@ -1,6 +1,6 @@
 CC = g++
 SRC = ./*.cpp ./*.hpp
-OPTS = -fopenmp
+OPTS = -fopenmp -std=c++17
 
 all:
 	$(CC) $(OPTS) -O3 $(SRC) -o ./main

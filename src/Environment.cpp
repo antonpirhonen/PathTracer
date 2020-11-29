@@ -96,9 +96,12 @@ static std::tuple<Vec3, Vec3> BoundingBox(std::vector<Triangle>& triangles) {
 			   Vec3(maxcoords[0], maxcoords[1], maxcoords[2]));
 }
 
-void Environment::LoadMesh(std::string path, Material* material,
+void Environment::LoadMesh(std::string dir, std::string filename, Material* material,
 			   Vec3 midpoint, float height,
 			   float xrot, float yrot, float zrot) {
+
+    std::string path = dir + filename;
+    
     std::ifstream file (path);
     if (!file.is_open()) {
         std::cout << ".obj file " << path <<" not found" << std::endl;
