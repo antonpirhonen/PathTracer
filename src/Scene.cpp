@@ -11,7 +11,7 @@ Color Scene::ParseColor(json &color) {
     return Color(color["r"], color["g"], color["b"]);
 }
 
-void Scene::DrawImageFrom(std::string fileName) {
+void Scene::DrawImageFrom(std::string fileName, int samples_per_pixel) {
 
     std::ifstream file(fileName);
     json scene;
@@ -83,5 +83,5 @@ for (auto object : scene["objects"]) {
     }
 
     sceneEnv.PrintInfo();
-    parsedCamera.GetImage(sceneEnv, 10);
+    parsedCamera.GetImage(sceneEnv, samples_per_pixel);
 }

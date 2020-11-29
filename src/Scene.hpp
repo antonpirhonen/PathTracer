@@ -22,7 +22,7 @@ class Scene {
 public:
     Scene() { }
 
-    void DrawImageFrom(std::string fileName);
+    void DrawImageFrom(std::string fileName, int samples_per_pixel);
 
 private:
     Vec3 ParseVector(json &vector);

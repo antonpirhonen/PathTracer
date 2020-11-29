@@ -60,4 +60,19 @@ void Image::DrawPng() const {
     delete[] pixels;
 
 }
- 
+
+void Image::Normalize() {
+    float maxi = 0; // maximal color component intensity
+    for (const auto &c : colors_) {
+	std::tuple<float, float, float> components = c.GetComponents();
+	float r = std::get<0>(components);
+	float g = std::get<1>(components);
+	float b = std::get<2>(components);
+	maxi = (maxi > r) ? maxi : r;
+	maxi = (maxi > g) ? maxi : r;
+	maxi = (maxi > b) ? maxi : r;
+    }
+    for (auto &c : colors_) {
+	c = c / maxi;
+    }
+}

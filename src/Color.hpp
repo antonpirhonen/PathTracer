@@ -43,6 +43,7 @@ public:
     Color operator + (const Color& c) const;
     Color operator * (const Color& c) const;
     Color operator / (const float c) const;
+
     friend std::ostream& operator<<(std::ostream& os, Color& c);
 
 private:
