@@ -3,7 +3,7 @@
 int main() {
     
     Scene scene = Scene();
-    scene.DrawImageFrom("./scene.json");
+    scene.DrawImageFrom("./environments/sphere/scene.json");
     
     return 0;
 }
