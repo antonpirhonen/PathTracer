@@ -87,13 +87,32 @@
 			"comment": "Big wall of light",
 			"type": "mesh",
 			"path": "./lights.obj",
-			"materialIndex": 0
+		        "materialIndex": 0,
+		        "midpoint": {
+			    "x": -20,
+			    "y": 0,
+			    "z": 0
+			},
+		        "height": 2000,
+		        "xrot": 0,
+		        "yrot": 0,
+		        "zrot": 0
+		    
 		},
 		{
 			"comment": "Red ball",
 			"type": "mesh",
 			"path": "./sphere.obj",
-			"materialIndex": 3
+		        "materialIndex": 1,
+		        "midpoint": {
+			    "x": 30,
+			    "y": 5,
+			    "z": -3
+			},
+		        "height": 18,
+		        "xrot": 0,
+		        "yrot": 0,
+		        "zrot": 0		    
 		}
 	]
 }

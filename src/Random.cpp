@@ -10,15 +10,15 @@
 
     // returns random number thats in [0, 1)
 float Random::randomNumber() {
-    static std::mt19937 generator(std::time(0));
-    static std::uniform_real_distribution<double> distribution(0.0, 1.0);
+    thread_local std::mt19937 generator(std::time(0));
+    thread_local std::uniform_real_distribution<double> distribution(0.0, 1.0);
     return distribution(generator);
 }
 
     // returns random number thats in [min, max)
 float Random::randomNumber(float min, float max) {
-    static std::mt19937 generator(std::time(0));
-    static std::uniform_real_distribution<float> distribution(min, max);
+    thread_local std::mt19937 generator(std::time(0));
+    thread_local std::uniform_real_distribution<float> distribution(min, max);
     return distribution(generator);
 }
 

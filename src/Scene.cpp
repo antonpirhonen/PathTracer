@@ -1,4 +1,5 @@
 #include "Scene.hpp"
+#include <filesystem>
 
 Vec3 Scene::ParseVector(json &vector) {
     std::cout << "Parsed vector: " << vector["x"] << ", " << vector["y"] << ", " << vector["z"] << std::endl;
@@ -10,7 +11,7 @@ Color Scene::ParseColor(json &color) {
     return Color(color["r"], color["g"], color["b"]);
 }
 
-void Scene::DrawImageFrom(std::string fileName) {
+void Scene::DrawImageFrom(std::string fileName, int samples_per_pixel) {
 
     std::ifstream file(fileName);
     json scene;
@@ -66,12 +67,21 @@ for (auto object : scene["objects"]) {
                 auto comment = object["comment"];
                 auto materialIndex = object["materialIndex"];
                 auto material = sceneEnv.MaterialAt(materialIndex);
-                auto objPath = object["path"]; 
+		auto midpoint = ParseVector(object["midpoint"]);
+		auto height = object["height"];
+		auto xrot = object["xrot"];
+		auto yrot = object["yrot"];
+		auto zrot = object["zrot"];
+                auto objPath = object["path"];
                 std::cout << "Added mesh object!, Comment: " << comment << std::endl;
-                sceneEnv.LoadEnvironment(objPath, material);
+
+		std::filesystem::path p = fileName;
+		std::string meshdir = p.remove_filename().string();
+                sceneEnv.LoadMesh(meshdir, objPath, material, midpoint, height, xrot, yrot, zrot);
+
         } 
     }
 
     sceneEnv.PrintInfo();
-    parsedCamera.GetImage(sceneEnv, 1);
+    parsedCamera.GetImage(sceneEnv, samples_per_pixel);
 }

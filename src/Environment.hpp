@@ -15,9 +15,9 @@ public:
     void AddMaterial(Material*);
     Material* MaterialAt(int);
     void PrintInfo() const;
-    void SaveEnvironment(std::string);
-    void LoadEnvironment(std::string, Material*);
-    void LoadBodyFromFile(std::string);
+    void LoadMesh(std::string dir, std::string filename, Material* material,
+		  Vec3 midpoint, float height,
+		  float xrot, float yrot, float zrot);
 
 private:
     std::vector<Material*> materials_ = { };

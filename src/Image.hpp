@@ -11,6 +11,7 @@ public:
     Color* GetPtrToPixel(int i, int j);
     void DrawPpm() const;
     void DrawPng() const;
+    void Normalize();
     
 private:
     std::vector<Color> colors_;

@@ -1,25 +1,21 @@
 #include "Color.hpp"
 
 Color::Color(float r, float g, float b) : r_(r), g_(g), b_(b) {
-    if (r < 0 || r > 1 || g < 0 || g > 1 || b < 0 || b > 1) {
-	throw std::invalid_argument("Values given to the constructor of class"
-				    " Color were not between 0 and 1");
-    }
-    r_ = r;
-    g_ = g;
-    b_ = b;
+    if (r < 0) r_ = 0;
+    if (r > 1) r_ = 1;
+    if (g < 0) g_ = 0;
+    if (g > 1) g_ = 1;
+    if (b < 0) b_ = 0;
+    if (b > 1) b_ = 1;
 }
 
 Color::Color(std::tuple<float, float, float> rgb) {
-    if (std::get<0>(rgb) < 0 || std::get<0>(rgb) > 1 ||
-	std::get<1>(rgb) < 0 || std::get<1>(rgb) > 1 ||
-	std::get<2>(rgb) < 0 || std::get<2>(rgb) > 1) {
-	throw std::invalid_argument("Values given to the constructor of class"
-				    " Color were not between 0 and 1");
-    }
-    r_ = std::get<0>(rgb);
-    g_ = std::get<1>(rgb);
-    b_ = std::get<2>(rgb);
+    if (std::get<0>(rgb) < 0) r_ = 0;
+    if (std::get<0>(rgb) > 1) r_ = 1;
+    if (std::get<1>(rgb) < 0) g_ = 0;
+    if (std::get<1>(rgb) > 1) g_ = 1;
+    if (std::get<2>(rgb) < 0) b_ = 0;
+    if (std::get<2>(rgb) > 1) b_ = 1;
 }
   
 std::tuple<float, float, float> Color::GetComponents() const {
