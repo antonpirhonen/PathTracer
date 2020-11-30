@@ -45,7 +45,7 @@ Vec3 Random::RandomVector(Vec3 vector, float degree) {
     auto a2 = atan2(vector.Y(), vector.X());
 
     randomVector = randomVector.RotateAroundYAxis(a1 * 180 / M_PI);
-    randomVector = randomVector.RotateAroundYAxis(a2 * 180 / M_PI);
+    randomVector = randomVector.RotateAroundZAxis(a2 * 180 / M_PI);
 
     return randomVector;
 
