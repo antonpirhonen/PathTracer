@@ -1,11 +1,19 @@
 #ifndef CAMERA_HPP
 #define CAMERA_HPP
-#include <array>
+
+#include <vector>
+#include <ctime>
+#include <cmath>
+#include <fstream>
+#include <cstdio>
+#include <iostream>
+#include <iterator>
+#include <omp.h>
 
 #include "Environment.hpp"
 #include "Vec3.hpp"
 #include "Ray.hpp"
-#include "structs.hpp"
+#include "Image.hpp"
 
 class Camera{
 public:

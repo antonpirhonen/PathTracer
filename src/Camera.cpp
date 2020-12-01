@@ -1,18 +1,4 @@
-#include <array>
-#include <vector>
-#include <ctime>
-#include <cmath>
-#include <fstream>
-#include <cstdio>
-#include <iostream>
-#include <iterator>
-#include "Environment.hpp"
-#include "Vec3.hpp"
-#include "Ray.hpp"
-#include "structs.hpp"
 #include "Camera.hpp"
-#include "Image.hpp"
-#include <omp.h>
 
 void Camera::GetImage(Environment& env, unsigned int spp) {
     Image image(y_reso_, x_reso_);
@@ -20,7 +6,6 @@ void Camera::GetImage(Environment& env, unsigned int spp) {
 
     Vec3 dir = direction_;
     dir.Normalize();
-
 	Vec3 orig = origin_;
 	Vec3 x_unit = Vec3(1,0,0);
 	Vec3 y_unit = Vec3(0,1,0);
@@ -31,7 +16,6 @@ void Camera::GetImage(Environment& env, unsigned int spp) {
 	if ((dir.DotProduct(x_unit) == 0) && (dir.DotProduct(y_unit) == 0)){
  		image_x = Vec3(1 + (dir.Z() > 0)*(-2),0,0);
 		image_y = Vec3(0,1,0);
-//		std::cout << "IF" << std::endl;
 	} else {
 		Vec3 image_x_dir = z_unit.CrossProduct(dir);
 		image_x = tan(x_angle_/180*M_PI/2) / image_x_dir.Norm() * image_x_dir;
@@ -44,14 +28,6 @@ void Camera::GetImage(Environment& env, unsigned int spp) {
 	Vec3 bl_corner = dir - image_x - image_y;
     Vec3 br_corner = dir + image_x - image_y;
 
-    std::cout << tl_corner.X() << " " << tl_corner.Y() << " " << tl_corner.Z() << std::endl;
-    std::cout << br_corner.X() << " " << br_corner.Y() << " " << br_corner.Z() << std::endl;    
-    std::cout << tr_corner.X() << " " << tr_corner.Y() << " " << tr_corner.Z() << std::endl;
-    std::cout << bl_corner.X() << " " << bl_corner.Y() << " " << bl_corner.Z() << "\n" << std::endl;
-
-
-
-
     float pixels_total = static_cast<float>(x_reso_*y_reso_); // float, since this is used in division later
     int pixels_done = 0;
     int last_ten = 0;
@@ -62,10 +38,8 @@ void Camera::GetImage(Environment& env, unsigned int spp) {
 	for (int j = 0; j < x_reso_; j++) {
 	    Vec3 ray_dir = tl_corner + (float(j)/float(x_reso_))*(tr_corner-tl_corner) + (float(i)/float(y_reso_))*(bl_corner-tl_corner);
         ray_dir.Normalize();
-//        std::cout << ray_dir.X() << " " << ray_dir.Y() << " " << ray_dir.Z() << std::endl;
 	    for (unsigned int sample = 0; sample < spp; sample++) {
 		Ray ray = Ray(origin_, ray_dir);
-		//std::cout << i << std::endl;
 		while (!ray.IsFinished()) {
 		    std::tuple<float, float, float> min_distance = std::make_tuple(1000000, -1, -1);
 		    std::tuple<float, float, float> temp_distance = std::make_tuple(0,0,0);
