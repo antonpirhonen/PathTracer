@@ -15,10 +15,10 @@
 			"y": 2,
 			"z": -2
 		},
-		"xReso": 100,
-		"yReso": 100
+		"xReso": 1200,
+		"yReso": 1200
 	},
-	"materials": [
+	"materials": [	
 		{
 			"comment": "Light source",
 			"type": "specular",
@@ -35,91 +35,91 @@
 			"isLuminous": true
 		},
 		{
-			"comment": "Metallic Specular",
+			"comment": "White wall",
+			"type": "diffuse",
+			"mattness": 0.5,
+			"color": {
+				"r": 1,
+				"g": 1,
+				"b": 1
+			},
+			"colorRem": {
+				"r": 0.92,
+				"g": 0.92,
+				"b": 0.92
+			},
+			"isLuminous": false
+		},
+		{
+			"comment": "Red wall",
+			"type": "diffuse",
+			"mattness": 0.5,
+			"color": {
+				"r": 1,
+				"g": 1,
+				"b": 1
+			},
+			"colorRem": {
+				"r": 1,
+				"g": 0.75,
+				"b": 0.75
+			},
+			"isLuminous": false
+		},
+		{
+			"comment": "Blue wall",
+			"type": "diffuse",
+			"mattness": 0.5,
+			"color": {
+				"r": 1,
+				"g": 1,
+				"b": 1
+			},
+			"colorRem": {
+				"r": 0.75,
+				"g": 0.75,
+				"b": 1
+			},
+			"isLuminous": false
+		},
+		{
+			"comment": "Sphere",
 			"type": "specular",
 			"color": {
-				"r": 0.77,
-				"g": 0.8,
-				"b": 0.8
-			},
-			"colorRem": {
-				"r": 0.77,
-				"g": 0.8,
-				"b": 0.8
-			},
-			"isLuminous": false
-		},
-		{
-			"comment": "Transparent",
-			"type": "transparent",
-			"refIndex": 0.5,
-			"color": {
-				"r": 1,
-				"g": 0,
-				"b": 0
-			},
-			"colorRem": {
-				"r": 1,
-				"g": 0,
-				"b": 0
-			},
-			"isLuminous": false
-		},
-		{
-			"comment": "Diffuse Wall material",
-			"type": "diffuse",
-			"mattness": 0.05,
-			"color": {
 				"r": 1,
 				"g": 1,
 				"b": 1
 			},
 			"colorRem": {
-				"r": 0.52,
-				"g": 0.37,
-				"b": 0.26
-			},
-			"isLuminous": false
-		},
-		{
-			"comment": "Black Diffuse",
-			"type": "diffuse",
-			"mattness": 0.02,
-			"color": {
 				"r": 1,
 				"g": 1,
 				"b": 1
-			},
-			"colorRem": {
-				"r": 0.15,
-				"g": 0.15,
-				"b": 0.15
 			},
 			"isLuminous": false
 		}
 	],
 	"objects": [
 		{
-			"comment": "Big wall of light",
+			"comment": "Light2",
 			"type": "mesh",
 			"path": "./lights.obj",
 		        "materialIndex": 0,
 		        "midpoint": {
-			    "x": -20,
+			    "x": -30,
 			    "y": 0,
 			    "z": 0
 			},
-		        "height": 2000,
+		        "height": 100,
 		        "xrot": 0,
 		        "yrot": 0,
 		        "zrot": 0
 		    
 		},
 		{
-			"comment": "Reflective walls",
+			"comment": "Walls",
 			"type": "mesh",
 			"path": "./seinät.obj",
-		        "materialIndex": 3,
+		        "materialIndex": 1,
 		        "midpoint": {
 			    "x": 0,
 			    "y": 0,
@@ -129,37 +129,69 @@
 		        "xrot": 0,
 		        "yrot": 0,
 		        "zrot": 0
+		},
+		{
+			"comment": "Red wall",
+			"type": "mesh",
+			"path": "./red-wall.obj",
+		        "materialIndex": 2,
+		        "midpoint": {
+			    "x": 0,
+			    "y": -5,
+			    "z": 0
+			},
+		        "height": 10,
+		        "xrot": 0,
+		        "yrot": 0,
+		        "zrot": 0
 		    
 		},
 		{
-			"comment": "Knight",
+			"comment": "Blue wall",
 			"type": "mesh",
-			"path": "./knight.obj",
-		        "materialIndex": 1,
+			"path": "./blue-wall.obj",
+		        "materialIndex": 3,
 		        "midpoint": {
 			    "x": 0,
-			    "y": -1.5,
+			    "y": 5,
 			    "z": 0
 			},
-		        "height": 4,
+		        "height": 10,
 		        "xrot": 0,
 		        "yrot": 0,
-		        "zrot": 0		    
+		        "zrot": 0
 		},
 		{
-			"comment": "Knight2",
+			"comment": "Sphere",
 			"type": "mesh",
-			"path": "./knight.obj",
+			"path": "./sphere.obj",
 		        "materialIndex": 4,
 		        "midpoint": {
-			    "x": 0,
-			    "y": 1.5,
-			    "z": 0
+			    "x": 6,
+			    "y": -1.7,
+			    "z": -1
 			},
-		        "height": 4,
+		        "height": 4.5,
 		        "xrot": 0,
 		        "yrot": 0,
-		        "zrot": 180		    
+		        "zrot": 0
+		    
+		},
+		{
+			"comment": "Sphere2",
+			"type": "mesh",
+			"path": "./sphere.obj",
+		        "materialIndex": 4,
+		        "midpoint": {
+			    "x": 5,
+			    "y": 2.5,
+			    "z": -2.5
+			},
+		        "height": 2,
+		        "xrot": 0,
+		        "yrot": 0,
+		        "zrot": 0
+		    
 		}
 	]
 }
