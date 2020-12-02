@@ -1,15 +1,33 @@
-CC = g++
-SRC = ./*.cpp
-OPTS = -fopenmp -std=c++17
+CXX = g++
+DEPS = ./*.hpp
 
-all:
-	$(CC) $(OPTS) -O3 $(SRC) -o ./main
+CXXFLAGS = -std=c++17 -fopenmp
 
-debug:
-	$(CC) $(OPTS) -g $(SRC) -o ./main
+target  := ./pathtracer
+obj_dir := ../build/obj/
+sources := $(shell find ./ -name \*.cpp)
+objects := $(addprefix $(obj_dir), $(notdir $(sources:.cpp=.o)))
+dirs    := $(dir $(sources))
+VPATH   := $(dirs)
 
-sanitize:
-	$(CC) $(OPTS) -g -fsanitize=address $(SRC) -o ./main
+# Compile optimized version
+pathtracer: $(objects)
+	$(CXX) $(CXXFLAGS) -O3 -o $@ $^
 
-clean:
-	rm -f ./main
+# Compile debug version
+debug: $(objects)
+	$(CXX) $(CXXFLAGS) -g -o $@ $^
+
+# Compile debug version with AddressSanitizer
+sanitize: $(objects)
+	$(CXX) $(CXXFLAGS) -g -fsanitize=address -o $@ $^
+
+# Delete executable and object files
+.PHONY: clean
+clean: 
+	rm -f $(obj_dir)*.o pathtracer
+
+# Rule to compile object files
+$(objects): $(obj_dir)%.o: %.cpp
+	$(CXX) $(CXXFLAGS) -o $@ -c $<
+
