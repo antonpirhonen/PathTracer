@@ -15,7 +15,7 @@
 #include "Ray.hpp"
 #include "Image.hpp"
 
-class Camera{
+class Camera {
 public:
     Camera(Vec3 origin, Vec3 direction, size_t x_reso = 1000, size_t y_reso = 1000, float x_angle = 45, float y_angle = 45)
     : origin_(origin),direction_(direction),  x_reso_(x_reso), y_reso_(y_reso), x_angle_(x_angle), y_angle_(y_angle) {}
