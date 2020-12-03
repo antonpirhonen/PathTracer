@@ -1,5 +1,18 @@
 #include "Camera.hpp"
 
+static void print_progress(int percentage) {
+    int barlength = 20;
+    int numdone = barlength * (static_cast<float>(percentage) / 100);
+    std::cout << "\r[";
+    for (int i = 0; i < barlength; i++) {
+	if (i < numdone)
+	    std::cout << "=";
+	else
+	    std::cout << " ";		
+    }
+    std::cout << "] " << percentage << "%" << std::flush;
+}
+
 void Camera::GetImage(Environment& env, unsigned int spp) {
     Image image(y_reso_, x_reso_);
     std::vector<Triangle> bodies = env.GetBodies();
@@ -78,14 +91,15 @@ void Camera::GetImage(Environment& env, unsigned int spp) {
 	    
 	    if (omp_get_thread_num() == 0) {
 		if ((pixels_done / pixels_total) * 10 >= last_ten) {
+		    print_progress(last_ten*10);
 		    last_ten++;
-		    std::cout << "Rendering image "<< last_ten - 1 << "0% done. " << std::endl;
 		}
 	    }
 	    
 	} // j
     } // i
-    std::cout << "Rendering done, now drawing image." << std::endl;
+    print_progress(100);
+    std::cout << std::endl << "Rendering done, now drawing image." << std::endl;
     image.Normalize();
     image.DrawPng();
 }

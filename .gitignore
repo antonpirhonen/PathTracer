@@ -1,4 +1,5 @@
 main
+pathtracer
 .vscode
 *~
 *.ppm
