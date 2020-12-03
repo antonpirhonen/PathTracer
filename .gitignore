@@ -3,3 +3,4 @@ main
 *~
 *.ppm
 *.png
+*.o

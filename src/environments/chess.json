@@ -1,23 +1,20 @@
 {
 	"camera": {
 		"focalPoint": {
-			"x": -7,
+			"x": -12,
 			"y": 0,
-			"z": 0
+			"z": -9
 		},
-		"tlCorner": {
-			"x": 4,
-			"y": -2,
-			"z": 2
-		},
-		"brCorner": {
-			"x": 4,
-			"y": 2,
-			"z": -2
-		},
-		"xReso": 200,
-		"yReso": 200
-	},
+		"direction": {
+			"x": 12,
+			"y": 0,
+			"z": 9
+	}, 
+	"xAngle": 45,
+	"yAngle": 45,
+	"xReso": 1000,
+	"yReso": 1000
+},
 	"materials": [
 		{
 			"comment": "Light source",
@@ -35,7 +32,7 @@
 			"isLuminous": true
 		},
 		{
-			"comment": "Red diffuse",
+			"comment": "Green diffuse",
 			"type": "diffuse",
 			"mattness": 0.2,
 			"color": {
@@ -44,8 +41,8 @@
 				"b": 0
 			},
 			"colorRem": {
-				"r": 1,
-				"g": 0,
+				"r": 0,
+				"g": 0.4,
 				"b": 0
 			},
 			"isLuminous": false
@@ -100,14 +97,14 @@
 		    
 		},
 		{
-			"comment": "Red ball",
+			"comment": "Knight",
 			"type": "mesh",
-			"path": "./sphere.obj",
+			"path": "./king.obj",
 		        "materialIndex": 1,
 		        "midpoint": {
-			    "x": 30,
-			    "y": 5,
-			    "z": -3
+			    "x": 0,
+			    "y": 0,
+			    "z": 0
 			},
 		        "height": 18,
 		        "xrot": 0,

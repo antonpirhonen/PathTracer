@@ -1,5 +1,6 @@
 #include "Scene.hpp"
 #include <filesystem>
+#include "Camera.hpp"
 
 Vec3 Scene::ParseVector(json &vector) {
     std::cout << "Parsed vector: " << vector["x"] << ", " << vector["y"] << ", " << vector["z"] << std::endl;
@@ -20,10 +21,9 @@ void Scene::DrawImageFrom(std::string fileName, int samples_per_pixel) {
 
     auto cameraInfo = scene["camera"];
     auto focalPoint = ParseVector(cameraInfo["focalPoint"]);
-    auto tlCorner = ParseVector(cameraInfo["tlCorner"]);
-    auto brCorner = ParseVector(cameraInfo["brCorner"]);
+    auto direction = ParseVector(cameraInfo["direction"]);
 
-    CameraSimple parsedCamera = CameraSimple(focalPoint, tlCorner, brCorner, cameraInfo["xReso"], cameraInfo["yReso"]);
+    Camera parsedCamera = Camera(focalPoint, direction, cameraInfo["xReso"], cameraInfo["yReso"], cameraInfo["xAngle"], cameraInfo["yAngle"]);
     std::cout << "Added camera!" << std::endl;
     Environment sceneEnv = Environment();
 

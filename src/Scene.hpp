@@ -7,7 +7,7 @@
 
 #include "Vec3.hpp"
 #include "Color.hpp"
-#include "CameraSimple.hpp"
+#include "Camera.hpp"
 #include "Environment.hpp"
 
 #include "MaterialSpecular.hpp"
