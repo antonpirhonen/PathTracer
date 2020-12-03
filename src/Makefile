@@ -26,7 +26,7 @@ pathtracer: $(objects)
 
 .PHONY: clean
 clean: 
-	rm -f $(obj_dir)*.o pathtracer
+	rm -f $(obj_dir)*.o ./pathtracer
 
 $(objects): $(obj_dir)%.o: %.cpp
 	$(CXX) $(CXXFLAGS) -o $@ -c $<
