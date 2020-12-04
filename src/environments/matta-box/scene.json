@@ -15,8 +15,8 @@
 			"y": 2,
 			"z": -2
 		},
-		"xReso": 1200,
-		"yReso": 1200
+		"xReso": 100,
+		"yReso": 100
 	},
 	"materials": [	
 		{
@@ -44,23 +44,23 @@
 				"b": 1
 			},
 			"colorRem": {
-				"r": 0.92,
-				"g": 0.92,
-				"b": 0.92
+				"r": 0.99,
+				"g": 0.99,
+				"b": 0.99
 			},
 			"isLuminous": false
 		},
 		{
 			"comment": "Red wall",
 			"type": "diffuse",
-			"mattness": 0.5,
+			"mattness": 0.3,
 			"color": {
 				"r": 1,
 				"g": 1,
 				"b": 1
 			},
 			"colorRem": {
-				"r": 1,
+				"r": 0.99,
 				"g": 0.75,
 				"b": 0.75
 			},
@@ -69,7 +69,7 @@
 		{
 			"comment": "Blue wall",
 			"type": "diffuse",
-			"mattness": 0.5,
+			"mattness": 0.3,
 			"color": {
 				"r": 1,
 				"g": 1,
@@ -78,7 +78,7 @@
 			"colorRem": {
 				"r": 0.75,
 				"g": 0.75,
-				"b": 1
+				"b": 0.99
 			},
 			"isLuminous": false
 		},
@@ -103,7 +103,7 @@
 			"comment": "Light2",
 			"type": "mesh",
 			"path": "./lights.obj",
-		        "materialIndex": 0,
+		        "materialIndex": 1,
 		        "midpoint": {
 			    "x": -30,
 			    "y": 0,
@@ -181,7 +181,7 @@
 			"comment": "Sphere2",
 			"type": "mesh",
 			"path": "./sphere.obj",
-		        "materialIndex": 4,
+		        "materialIndex": 0,
 		        "midpoint": {
 			    "x": 5,
 			    "y": 2.5,
