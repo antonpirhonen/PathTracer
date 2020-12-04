@@ -9,6 +9,8 @@ public:
         Material(luminous, color, color_rem), ref_index_(ref_index)  { };
 
     Vec3 Reflect(Vec3 original_direction, Vec3 unit_normal);
+
+    float GetR(float cos);
     
 private:
     float ref_index_;

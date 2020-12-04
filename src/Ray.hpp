@@ -6,10 +6,8 @@
 
 class Ray {
 public:
-    Ray(Vec3 origin = Vec3{0,0,0}, Vec3 direction = Vec3{0,0,0},
-	size_t collisions_Left = 10, Color color = Color(1,1,1))
-	: origin_(origin), direction_(direction), collisions_Left_(collisions_Left),
-	  color_(color) { }
+    Ray(Vec3 origin = Vec3{0,0,0}, Vec3 direction = Vec3{0,0,0}, Color color = Color(1,1,1))
+	: origin_(origin), direction_(direction), color_(color) { }
   
     void SetNewDirection(Vec3);
     void SetNewOrigin(Vec3);
@@ -27,7 +25,6 @@ private:
     Vec3 origin_;
     Vec3 direction_;
     Color color_ ;
-    size_t collisions_Left_;
     bool finished_ = false;
 };
 

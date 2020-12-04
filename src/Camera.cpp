@@ -35,55 +35,62 @@ void Camera::GetImage(Environment& env, unsigned int spp) {
     std::cout << "Rendering image using " << omp_get_max_threads() << " CPU threads." << std::endl;
     #pragma omp parallel for schedule(static,1)
     for (int i = 0; i < y_reso_; i++) {
-	for (int j = 0; j < x_reso_; j++) {
-	    Vec3 ray_dir = tl_corner + (float(j)/float(x_reso_))*(tr_corner-tl_corner) + (float(i)/float(y_reso_))*(bl_corner-tl_corner);
-        ray_dir.Normalize();
-	    for (unsigned int sample = 0; sample < spp; sample++) {
-		Ray ray = Ray(origin_, ray_dir);
-		while (!ray.IsFinished()) {
-		    std::tuple<float, float, float> min_distance = std::make_tuple(1000000, -1, -1);
-		    std::tuple<float, float, float> temp_distance = std::make_tuple(0,0,0);
-		    std::vector<Triangle>::iterator closest_body;
-		    bool hits_something = false;
+		for (int j = 0; j < x_reso_; j++) {
+		    Vec3 ray_dir = tl_corner + (float(j)/float(x_reso_))*(tr_corner-tl_corner) + (float(i)/float(y_reso_))*(bl_corner-tl_corner);
+    	    ray_dir.Normalize();
+		    for (unsigned int sample = 0; sample < spp; sample++) {
+			Ray ray = Ray(origin_, ray_dir);
+			size_t collisions_left = 50;
+			while (!ray.IsFinished()) {
+				collisions_left -= 1;
+			    std::tuple<float, float, float> min_distance = std::make_tuple(1000000, -1, -1);
+		    	std::tuple<float, float, float> temp_distance = std::make_tuple(0,0,0);
+			    std::vector<Triangle>::iterator closest_body;
+			    bool hits_something = false;
 
-		    for (auto it = bodies.begin(); it != bodies.end(); it++) {
-			auto body = *it;
-			temp_distance = body.FindCollision(ray);
-			if (std::get<0>(temp_distance) > 0 && std::get<0>(temp_distance) < std::get<0>(min_distance)) {
-			    hits_something = true;
-			    min_distance = temp_distance;
-			    closest_body = it;
+			    for (auto it = bodies.begin(); it != bodies.end(); it++) {
+					auto body = *it;
+					temp_distance = body.FindCollision(ray);
+					if (std::get<0>(temp_distance) > 0 && std::get<0>(temp_distance) < std::get<0>(min_distance)) {
+					    hits_something = true;
+				    	min_distance = temp_distance;
+					    closest_body = it;
+					}
+			    }
+
+		    	if (hits_something) {
+					Vec3 reflection_point = ray.GetOrigin() + ray.GetDirection()*std::get<0>(min_distance);
+					auto tr = *closest_body;
+					tr.Reflect(ray, reflection_point, std::get<1>(min_distance), std::get<2>(min_distance));
+			    }
+			    else {
+					ray.SetFinished();
+					ray.SetNewColor(Color(0,0,0));
+			    }
+				if(collisions_left == 0){
+					ray.SetFinished();
+					ray.SetNewColor(Color(0,0,0));
+				}
+			
 			}
-		    }
-
-		    if (hits_something) {
-			Vec3 reflection_point = ray.GetOrigin() + ray.GetDirection()*std::get<0>(min_distance);
-			auto tr = *closest_body;
-			tr.Reflect(ray, reflection_point, std::get<1>(min_distance), std::get<2>(min_distance));
-		    }
-		    else {
-			ray.SetFinished();
-			ray.SetNewColor(Color(0,0,0));
-		    }
-		}
-		Color addition = ray.GetColor() / spp;
-		Color* ptr_c = image.GetPtrToPixel(i,j);
-		*ptr_c = *ptr_c + addition;
-	    } // sample
+			Color addition = ray.GetColor() / spp;
+			Color* ptr_c = image.GetPtrToPixel(i,j);
+			*ptr_c = *ptr_c + addition;
+		    } // sample
 	    
-	    // Calculate progress:
+	    	// Calculate progress:
 	    	    
-#pragma omp atomic
-	    (pixels_done++);
+			#pragma omp atomic
+		    (pixels_done++);
+
+		    if (omp_get_thread_num() == 0) {
+			if ((pixels_done / pixels_total) * 10 >= last_ten) {
+			    last_ten++;
+			    std::cout << "Rendering image "<< last_ten - 1 << "0% done. " << std::endl;
+			}
+	    	}
 	    
-	    if (omp_get_thread_num() == 0) {
-		if ((pixels_done / pixels_total) * 10 >= last_ten) {
-		    last_ten++;
-		    std::cout << "Rendering image "<< last_ten - 1 << "0% done. " << std::endl;
-		}
-	    }
-	    
-	} // j
+		} // j
     } // i
     std::cout << "Rendering done, now drawing image." << std::endl;
     image.Normalize();
