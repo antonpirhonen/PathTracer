@@ -104,7 +104,7 @@ void Environment::LoadMesh(std::string dir, std::string filename, Material* mate
     
     std::ifstream file (path);
     if (!file.is_open()) {
-        std::cout << ".obj file " << path <<" not found" << std::endl;
+        std::cout << "Missing obj file: " << path <<" was not found." << std::endl;
         return;
     }
 

@@ -1,85 +1,84 @@
 #include "Scene.hpp"
-#include <filesystem>
 #include "Camera.hpp"
+#include <filesystem>
+#include <stdexcept> 
 
 Vec3 Scene::ParseVector(json &vector) {
-    std::cout << "Parsed vector: " << vector["x"] << ", " << vector["y"] << ", " << vector["z"] << std::endl;
+    // std::cout << "Parsed vector: " << vector["x"] << ", " << vector["y"] << ", " << vector["z"] << std::endl;
     return Vec3(vector["x"], vector["y"], vector["z"]);
 }
 
 Color Scene::ParseColor(json &color) {
-    std::cout << "Parsed color: " << color["r"] << ", " << color["g"] << ", " << color["b"] << std::endl;
+    // std::cout << "Parsed color: " << color["r"] << ", " << color["g"] << ", " << color["b"] << std::endl;
     return Color(color["r"], color["g"], color["b"]);
 }
 
 void Scene::DrawImageFrom(std::string fileName, int samples_per_pixel) {
 
     std::ifstream file(fileName);
+    if (!file) {
+        throw std::invalid_argument("JSON file with given path not found.");
+    }
+
     json scene;
     file >> scene;
     file.close();
-
     auto cameraInfo = scene["camera"];
     auto focalPoint = ParseVector(cameraInfo["focalPoint"]);
     auto direction = ParseVector(cameraInfo["direction"]);
 
     Camera parsedCamera = Camera(focalPoint, direction, cameraInfo["xReso"], cameraInfo["yReso"], cameraInfo["xAngle"], cameraInfo["yAngle"]);
-    std::cout << "Added camera!" << std::endl;
     Environment sceneEnv = Environment();
 
-    for (auto material : scene["materials"]) {
+    auto materials = scene["materials"];
+    if (materials.size() == 0) throw std::invalid_argument("No materials defined in JSON.");
 
-        if (material["type"] == "specular")
-            {
-                auto materialColor = ParseColor(material["color"]);
-                auto materialColorRem = ParseColor(material["colorRem"]);
-                auto materialIsLuminous = material["isLuminous"];
-                auto specular = new MaterialSpecular(materialIsLuminous, materialColor, materialColorRem);
-                sceneEnv.AddMaterial(specular);
-                //std::cout << "Added specular material" << std::endl;
+    for (auto material : materials) {
+        auto materialColor = ParseColor(material["color"]);
+        auto luminosity = material["isLuminous"];
 
-            } else if (material["type"] == "diffuse")
-            {
-                auto materialColor = ParseColor(material["color"]);
-                auto materialColorRem = ParseColor(material["colorRem"]);
-                auto materialMattness = material["mattness"];
-                auto materialIsLuminous = material["isLuminous"];
-                auto diffuse = new MaterialDiffuse(materialIsLuminous, materialColor, materialColorRem, materialMattness);
-                sceneEnv.AddMaterial(diffuse);
-                //std::cout << "Added diffuse material" << std::endl;
+        if (luminosity) {
+            auto lightSource = new MaterialSpecular(luminosity, materialColor);
+            sceneEnv.AddMaterial(lightSource);
+            continue;
+        }
 
-            } else if (material["type"] == "transparent")
-            {
-                auto materialColor = ParseColor(material["color"]);
-                auto materialColorRem = ParseColor(material["colorRem"]);
-                auto materialRefIndex = material["refIndex"];
-                auto materialIsLuminous = material["isLuminous"];
-                auto transparent = new MaterialTransparent(materialIsLuminous, materialColor, materialColorRem, materialRefIndex);
-                sceneEnv.AddMaterial(transparent);
-                //std::cout << "Added transparent material" << std::endl;
-
-            } 
+        if (material["type"] == "specular") {
+            auto specular = new MaterialSpecular(luminosity, Color(0,0,0), materialColor);
+            sceneEnv.AddMaterial(specular);
+            continue;
+        }
+        
+        if (material["type"] == "diffuse") {
+            auto materialMattness = material["mattness"];
+            auto diffuse = new MaterialDiffuse(luminosity, Color(0,0,0), materialColor, materialMattness);
+            sceneEnv.AddMaterial(diffuse);
+            continue;
+        }
+        
+        if (material["type"] == "transparent") {
+            auto materialRefIndex = material["refIndex"];
+            auto transparent = new MaterialTransparent(luminosity, Color(0,0,0), materialColor, materialRefIndex);
+            sceneEnv.AddMaterial(transparent);
+        }
     }
 
-for (auto object : scene["objects"]) {
-
+    for (auto object : scene["objects"]) {
         if (object["type"] == "mesh") {
-                auto comment = object["comment"];
-                auto materialIndex = object["materialIndex"];
-                auto material = sceneEnv.MaterialAt(materialIndex);
-		auto midpoint = ParseVector(object["midpoint"]);
-		auto height = object["height"];
-		auto xrot = object["xrot"];
-		auto yrot = object["yrot"];
-		auto zrot = object["zrot"];
-                auto objPath = object["path"];
-                std::cout << "Added mesh object!, Comment: " << comment << std::endl;
+            auto comment = object["comment"];
+            auto materialIndex = object["materialIndex"];
+            auto material = sceneEnv.MaterialAt(materialIndex);
+            auto midpoint = ParseVector(object["midpoint"]);
+            auto height = object["height"];
+            auto xrot = object["xrot"];
+            auto yrot = object["yrot"];
+            auto zrot = object["zrot"];
+            auto objPath = object["path"];
 
-		std::filesystem::path p = fileName;
-		std::string meshdir = p.remove_filename().string();
-                sceneEnv.LoadMesh(meshdir, objPath, material, midpoint, height, xrot, yrot, zrot);
-
-        } 
+            std::filesystem::path p = fileName;
+            std::string meshdir = p.remove_filename().string();
+            sceneEnv.LoadMesh(meshdir, objPath, material, midpoint, height, xrot, yrot, zrot);
+        }
     }
 
     sceneEnv.PrintInfo();

@@ -12,19 +12,14 @@
 	}, 
 	"xAngle": 45,
 	"yAngle": 45,
-	"xReso": 1000,
-	"yReso": 1000
+	"xReso": 100,
+	"yReso": 100
 },
 	"materials": [
 		{
 			"comment": "Light source",
 			"type": "specular",
 			"color": {
-				"r": 1,
-				"g": 1,
-				"b": 1
-			},
-			"colorRem": {
 				"r": 1,
 				"g": 1,
 				"b": 1
@@ -36,13 +31,8 @@
 			"type": "diffuse",
 			"mattness": 0.2,
 			"color": {
-				"r": 1,
-				"g": 0,
-				"b": 0
-			},
-			"colorRem": {
 				"r": 0,
-				"g": 0.4,
+				"g": 1,
 				"b": 0
 			},
 			"isLuminous": false
@@ -56,22 +46,12 @@
 				"g": 0,
 				"b": 0
 			},
-			"colorRem": {
-				"r": 1,
-				"g": 0,
-				"b": 0
-			},
 			"isLuminous": false
 		},
 		{
 			"comment": "Specular",
 			"type": "specular",
 			"color": {
-				"r": 1,
-				"g": 0,
-				"b": 0
-			},
-			"colorRem": {
 				"r": 1,
 				"g": 0,
 				"b": 0

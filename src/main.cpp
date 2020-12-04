@@ -16,8 +16,17 @@ int main(int argc, char* argv[]) {
 
 	std::cout << "Rendering an image with " << samples_per_pixel
 		  << " rays per pixel" << std::endl;
-	
-	scene.DrawImageFrom(filename, samples_per_pixel);
+
+	try {
+		scene.DrawImageFrom(filename, samples_per_pixel);
+	} catch (std::invalid_argument& e) {
+		std::cout << "Invalid argument: " << e.what() << std::endl;
+	} catch (nlohmann::detail::type_error e) {
+		std::cout << "Error while parsing JSON: " << e.what() << std::endl;
+	} catch (std::out_of_range& oor) {
+		std::cout << "Given material index out of range: " << oor.what() << std::endl;
+	}
+
     }
     
     return 0;
