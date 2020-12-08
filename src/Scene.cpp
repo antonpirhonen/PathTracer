@@ -84,6 +84,9 @@ void Scene::DrawImageFrom(std::string fileName, int samples_per_pixel) {
             } catch (std::out_of_range& oor) {
                 std::string errorMsg = "Vertice or normal index out of range in .obj file: " + objPath.get<std::string>();
                 throw std::out_of_range(errorMsg);
+            } catch (std::invalid_argument& e) {
+                std::string errorMsg = "Unable to parse the format of the obj file: " + objPath.get<std::string>();
+                throw std::invalid_argument(errorMsg);
             }
         }
     }
