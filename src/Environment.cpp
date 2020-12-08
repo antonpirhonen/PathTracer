@@ -28,6 +28,7 @@ void Environment::AddMaterial(Material* material) {
 }
 
 Material* Environment::MaterialAt(int i) {
+    if (i > materials_.size() - 1) throw std::out_of_range("Material index out of range in json.");
     return materials_.at(i);
 }
 
@@ -104,7 +105,7 @@ void Environment::LoadMesh(std::string dir, std::string filename, Material* mate
     
     std::ifstream file (path);
     if (!file.is_open()) {
-        std::cout << ".obj file " << path <<" not found" << std::endl;
+        std::cout << "Missing obj file: " << path <<" was not found." << std::endl;
         return;
     }
 
