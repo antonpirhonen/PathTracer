@@ -28,6 +28,7 @@ void Environment::AddMaterial(Material* material) {
 }
 
 Material* Environment::MaterialAt(int i) {
+    if (i > materials_.size() - 1) throw std::out_of_range("Material index out of range in json.");
     return materials_.at(i);
 }
 

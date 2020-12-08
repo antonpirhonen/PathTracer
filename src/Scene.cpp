@@ -2,6 +2,7 @@
 #include "Camera.hpp"
 #include <filesystem>
 #include <stdexcept> 
+#include <string>
 
 Vec3 Scene::ParseVector(json &vector) {
     // std::cout << "Parsed vector: " << vector["x"] << ", " << vector["y"] << ", " << vector["z"] << std::endl;
@@ -77,7 +78,13 @@ void Scene::DrawImageFrom(std::string fileName, int samples_per_pixel) {
 
             std::filesystem::path p = fileName;
             std::string meshdir = p.remove_filename().string();
-            sceneEnv.LoadMesh(meshdir, objPath, material, midpoint, height, xrot, yrot, zrot);
+            
+            try {
+                sceneEnv.LoadMesh(meshdir, objPath, material, midpoint, height, xrot, yrot, zrot);
+            } catch (std::out_of_range& oor) {
+                std::string errorMsg = "Vertice or normal index out of range in .obj file: " + objPath.get<std::string>();
+                throw std::out_of_range(errorMsg);
+            }
         }
     }
 
