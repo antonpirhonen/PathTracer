@@ -1,0 +1,167 @@
+{
+	"camera": {
+		"focalPoint": {
+			"x": 0,
+			"y": -30,
+			"z": 0
+		},
+		"direction": {
+			"x": 0,
+			"y": 12,
+			"z": 0
+	}, 
+	"xAngle": 120,
+	"yAngle": 67.5,
+	"xReso": 1280,
+	"yReso": 720
+},
+	"materials": [
+		{
+			"comment": "Light source",
+			"index": 0,
+			"type": "specular",
+			"color": {
+				"r": 1,
+				"g": 1,
+				"b": 1
+			},
+			"isLuminous": true
+		},
+		{
+			"comment": "Brown diffuse",
+			"index": 1,
+			"type": "diffuse",
+			"mattness": 0.2,
+			"color": {
+				"r": 0.4,
+				"g": 0.26,
+				"b": 0.13
+			},
+			"isLuminous": false
+		},
+		{
+			"comment": "Transparent",
+			"index": 2,
+			"type": "transparent",
+			"refIndex": 0.6,
+			"color": {
+				"r": 1,
+				"g": 1,
+				"b": 1
+			},
+			"isLuminous": false
+		},
+		{
+			"comment": "Blue Specular",
+			"index": 3,
+			"type": "specular",
+			"color": {
+				"r": 0,
+				"g": 0,
+				"b": 1
+			},
+			"isLuminous": false
+		},
+		{
+			"comment": "white diffuse",
+			"index": 4,
+			"type": "diffuse",
+			"mattness": 0.5,
+			"color": {
+				"r": 0.7,
+				"g": 0.7,
+				"b": 0.7
+			},
+			"isLuminous": false
+		},
+		{
+			"comment": "Black diffuse",
+			"index": 5,
+			"type": "specular",
+			"color": {
+				"r": 0.25,
+				"g": 0.25,
+				"b": 0.25
+			},
+			"isLuminous": false
+		}
+	],
+	"objects": [
+		{
+			"comment": "Big wall of light",
+			"type": "mesh",
+			"path": "./lights.obj",
+		        "materialIndex": 0,
+		        "midpoint": {
+			    "x": 0,
+			    "y": -35,
+			    "z": 0
+			},
+		        "height": 2000,
+		        "xrot": 0,
+		        "yrot": 0,
+		        "zrot": 90
+		    
+		},
+		{
+			"comment": "box light",
+			"type": "mesh",
+			"path": "./Light.obj",
+		        "materialIndex": 0,
+		        "midpoint": {
+			    "x": 0,
+			    "y": 0,
+			    "z": 17
+			},
+		        "height": 1,
+		        "xrot": 90,
+		        "yrot": 0,
+		        "zrot": 0		    
+		},
+		{
+			"comment": "box ceiling floor and back",
+			"type": "mesh",
+			"path": "./WB.obj",
+		        "materialIndex": 4,
+		        "midpoint": {
+			    "x": 0,
+			    "y": 0,
+			    "z": 0
+			},
+		        "height": 50,
+		        "xrot": 90,
+		        "yrot": 0,
+		        "zrot": 0		    
+		},
+		{
+			"comment": "Pawn",
+			"type": "mesh",
+			"path": "./pawn.obj",
+		        "materialIndex": 5,
+		        "midpoint": {
+			    "x": -8,
+			    "y": -5,
+			    "z": -10
+			},
+		        "height": 10,
+		        "xrot": 0,
+		        "yrot": 0,
+		        "zrot": 0		    
+		},
+		{
+			"comment": "Bunny",
+			"type": "mesh",
+			"path": "./bunny.obj",
+		        "materialIndex": 1,
+		        "midpoint": {
+			    "x": 8,
+			    "y": 3,
+			    "z": -13
+			},
+		        "height": 10,
+		        "xrot": 90,
+		        "yrot": 0,
+		        "zrot": 30		    
+		}
+	]
+}

@@ -1,21 +1,51 @@
-# Sample README file for C++ programming project
+     _____      _   _       _                           
+    |  __ \    | | | |     | |                          
+    | |__) |_ _| |_| |__   | |_ _ __ __ _  ___ ___ _ __ 
+    |  ___/ _` | __| '_ \  | __| '__/ _` |/ __/ _ \ '__|
+    | |  | (_| | |_| | | | | |_| | | (_| | (_|  __/ |   
+    |_|   \__,_|\__|_| |_|  \__|_|  \__,_|\___\___|_|
 
-This is an initial git repository for your programming project.
-It contains an initial directory structure that we wish you could
-use as follows:
 
-  * `plan/` -- Your project plan should be put here. You may use different sources,
-    but we hope to get the plan **also as a pdf file**.
 
-  * `doc/` -- The documentation sources related to your project should be put here.
-    You may use different tools for documentation (e.g. latex),
-    but we hope to get the final version of the document
-    **also as pdf file**.
+## Introduction
+---------------
 
-  * `src/` -- Here are the C++ source files. You can have subfolders as needed.
+ In this project, our team of five planned and implemented a path tracer. 
+ Our main goal was that our path tracer could render images of different environments that include objects of any shape. 
+ We also wanted our path tracer to be user friendly so one of our goals was to make the user interface simple to use.
 
-  * `README.md` -- This file. You should modify it to represent
-    your project.
 
-You may also add other new directories as needed, for example
-for testing tools.
+## Main features
+----------------
+
+- Monte Carlo integration
+- Parsing objects from .obj files
+- Multiple material options for objects
+- Smooth mesh surfaces with phong normal interpolation
+- Custom scenes with .json files
+- Rendered image saved as .png
+- Multi-thread rendering
+- Simple to use!
+ 
+ 
+## Directory structure
+----------------------
+
+  * `build/` -- Folder for storing objects during compilation
+
+  * `doc/` -- Final documentation of our path tracer, also includes user guide!
+
+  * `plan/` -- Project plan
+
+  * `src/` -- Source code for building the path tracer
+
+
+## Contributors
+---------------
+
+- Anton Pirhonen
+- Atso Ikäheimo
+- Joona Munukka
+- Kalle Jyrkinen
+- Kerttu Aronen
+
