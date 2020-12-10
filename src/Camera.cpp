@@ -1,4 +1,5 @@
 #include "Camera.hpp"
+#include "Random.hpp"
 
 static void print_progress(int percentage) {
     int barlength = 20;
@@ -49,9 +50,10 @@ void Camera::GetImage(Environment& env, unsigned int spp) {
     #pragma omp parallel for schedule(static,1)
     for (int i = 0; i < y_reso_; i++) {
 	for (int j = 0; j < x_reso_; j++) {
-	    Vec3 ray_dir = tl_corner + (float(j)/float(x_reso_))*(tr_corner-tl_corner) + (float(i)/float(y_reso_))*(bl_corner-tl_corner);
-        ray_dir.Normalize();
-	    for (unsigned int sample = 0; sample < spp; sample++) {
+		Vec3 ray_dir_0 = tl_corner + (float(j)/float(x_reso_))*(tr_corner-tl_corner) + (float(i)/float(y_reso_))*(bl_corner-tl_corner);
+    	ray_dir_0.Normalize();
+		for (unsigned int sample = 0; sample < spp; sample++) {
+		Vec3 ray_dir = ray_dir_0 + (Random::randomNumber()/float(x_reso_))*(tr_corner-tl_corner) + (Random::randomNumber()/float(y_reso_))*(bl_corner-tl_corner);
 		Ray ray = Ray(origin_, ray_dir);
 		while (!ray.IsFinished()) {
 		    std::tuple<float, float, float> min_distance = std::make_tuple(1000000, -1, -1);
