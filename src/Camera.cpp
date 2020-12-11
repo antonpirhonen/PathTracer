@@ -1,6 +1,21 @@
 #include "Camera.hpp"
 #include "Random.hpp"
 
+Camera::Camera(Vec3 origin, Vec3 direction, size_t x_reso, size_t y_reso, float x_angle, float y_angle)
+    : origin_(origin),direction_(direction),  x_reso_(x_reso), y_reso_(y_reso), x_angle_(x_angle), y_angle_(y_angle) 
+	{
+		if(x_angle < 0) x_angle_ = -x_angle;
+		if(x_angle >179) {
+			x_angle = 179.0;
+			std::cout << "Provided x_angle was too large, using 179.0 deg instead" << std::endl;
+		}
+		if(y_angle < 0) x_angle_ = -y_angle;
+		if(y_angle >179) {
+			y_angle = 179.0;
+			std::cout << "Provided y_angle was too large, using 179.0 deg instead" << std::endl;
+		}
+	}
+
 static void print_progress(int percentage) {
     int barlength = 20;
     int numdone = barlength * (static_cast<float>(percentage) / 100);

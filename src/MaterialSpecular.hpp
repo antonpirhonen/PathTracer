@@ -1,8 +1,8 @@
 #ifndef SPECULAR_HPP
 #define SPECULAR_HPP
 
-#include "structs.hpp"
 #include "Material.hpp"
+#include "Vec3.hpp"
 
 class MaterialSpecular : public Material {
 public:

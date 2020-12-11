@@ -1,6 +1,6 @@
 #ifndef TRANSPARENT_HPP
 #define TRANSPARENT_HPP
-#include "structs.hpp"
+
 #include "Material.hpp"
 
 class MaterialTransparent : public Material {

@@ -1,8 +1,8 @@
 #ifndef RAY_HPP
 #define RAY_HPP
 #include <array>
-#include "structs.hpp"
 #include "Color.hpp"
+#include "Vec3.hpp"
 
 class Ray {
 public:

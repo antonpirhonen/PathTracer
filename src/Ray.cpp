@@ -1,5 +1,4 @@
 #include "Ray.hpp"
-#include "structs.hpp"
 
 void Ray::SetNewDirection(Vec3 dir){
     direction_ = dir;

@@ -1,12 +1,11 @@
 #ifndef DIFFUSE_HPP
 #define DIFFUSE_HPP
-#include "structs.hpp"
 #include "Material.hpp"
+#include "Vec3.hpp"
 
 class MaterialDiffuse : public Material {
 public:
-    MaterialDiffuse(bool luminous = false, Color color = Color(0,0,0), Color color_rem = Color(1,1,1), float mattness = 1) :
-	Material(luminous, color, color_rem), mattness_(mattness)  { };
+    MaterialDiffuse(bool luminous, Color color, Color color_rem, float mattness);
 
     MaterialDiffuse(MaterialDiffuse& m) {
         luminous_ = m.luminous_;

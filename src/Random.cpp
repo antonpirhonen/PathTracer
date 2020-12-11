@@ -1,6 +1,3 @@
-#ifndef RANDOM_CPP
-#define RANDOM_CPP
-
 #include <random>
 #include <ctime>
 #include <cmath>
@@ -72,5 +69,3 @@ Vec3 Random::RandomVectorInHemisphere(Vec3 normal) {
     return -1.0 * vector;
     }
 }
-
-#endif

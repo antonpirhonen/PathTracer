@@ -1,7 +1,6 @@
 #ifndef BODY_HPP
 #define BODY_HPP
 #include "Vec3.hpp"
-#include "structs.hpp"
 #include "Ray.hpp"
 #include <utility>
 #include <tuple>

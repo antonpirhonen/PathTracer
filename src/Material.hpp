@@ -1,8 +1,8 @@
 #ifndef MATERIAL_HPP
 #define MATERIAL_HPP
 
-#include "structs.hpp"
 #include "Color.hpp"
+#include "Vec3.hpp"
 
 class Material {
 public:

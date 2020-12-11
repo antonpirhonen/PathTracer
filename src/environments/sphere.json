@@ -13,8 +13,8 @@
 			}, 
 			"xAngle": 40,
 			"yAngle": 40,
-    		"xReso": 300,
-    		"yReso": 300
+    		"xReso": 100,
+    		"yReso": 100
     	},
     	"materials": [
     		{
@@ -81,7 +81,7 @@
     			"comment": "Red ball",
     			"type": "mesh",
     			"path": "./sphere.obj",
-    				"materialIndex": 1,
+    				"materialIndex": 3,
     		        "midpoint": {
     			    "x": 0,
     			    "y": 0,

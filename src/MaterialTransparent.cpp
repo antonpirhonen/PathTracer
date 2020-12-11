@@ -1,6 +1,3 @@
-#ifndef TRANSPARENT_CPP
-#define TRANSPARENT_CPP
-
 #include "MaterialTransparent.hpp"
 #include "Material.hpp"
 #include "Vec3.hpp"
@@ -55,10 +52,8 @@ Vec3 MaterialTransparent::Reflect(Vec3 original_direction, Vec3 unit_normal){
         return new_direction;       
     }
 
-    Vec3 new_direction = sin_refrac/sin_orig *(original_direction - orig_dot_n*unit_normal) + orig_dot_n*unit_normal;
+    Vec3 new_direction = n1/n2*original_direction+(n1/n2*cos(orig_angle)-std::sqrt(1-std::pow(sin_refrac,2)))*unit_normal;
     new_direction.Normalize();
 
     return new_direction;
 }
-
-#endif
