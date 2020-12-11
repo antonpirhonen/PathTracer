@@ -1,0 +1,176 @@
+{
+    "camera": {
+        "focalPoint": {
+            "x": -8,
+            "y": 0,
+            "z": 0
+        },
+        "direction": {
+            "x": 1,
+            "y": 0,
+            "z": 0
+        }, 
+        "xAngle": 40,
+        "yAngle": 40,
+        "xReso": 100,
+        "yReso": 100
+    },
+    "materials": [
+        {
+			"comment": "Light source",
+			"color": {
+				"r": 1,
+				"g": 1,
+				"b": 1
+			},
+			"isLuminous": true
+		},
+        {
+            "comment": "White diffuse walls",
+            "type": "diffuse",
+            "mattness": 0.3,
+            "color": {
+                "r": 0.8,
+                "g": 0.8,
+                "b": 0.8
+            },
+            "isLuminous": false
+        },
+        {
+            "comment": "Green specular",
+            "type": "specular",
+            "color": {
+                "r": 0,
+                "g": 1,
+                "b": 0.25
+            },
+            "isLuminous": false
+        },
+        {
+            "comment": "Green diffuse 1",
+            "type": "diffuse",
+            "mattness": 0.4,
+            "color": {
+                "r": 0,
+                "g": 1,
+                "b": 0.25
+            },
+            "isLuminous": false
+        },
+        {
+            "comment": "Green diffuse 2",
+            "type": "diffuse",
+            "mattness": 1,
+            "color": {
+                "r": 0,
+                "g": 1,
+                "b": 0.25
+            },
+            "isLuminous": false
+        },
+        {
+            "comment": "Transparent",
+            "type": "transparent",
+            "refIndex": 0.5,
+            "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1
+            },
+            "isLuminous": false
+        }
+    ],
+    "objects": [
+        {
+            "comment": "Background lights",
+            "type": "mesh",
+            "path": "./lights.obj",
+                "materialIndex": 0,
+                "midpoint": {
+                "x": -20,
+                "y": 0,
+                "z": 0
+            },
+                "height": 2000,
+                "xrot": 0,
+                "yrot": 0,
+                "zrot": 0
+            
+        },
+        {
+            "comment": "Walls",
+            "type": "mesh",
+            "path": "./walls.obj",
+                "materialIndex": 1,
+                "midpoint": {
+                "x": 5,
+                "y": 0,
+                "z": 0
+            },
+                "height": 10,
+                "xrot": 0,
+                "yrot": 0,
+                "zrot": 0		    
+        }, 
+        {
+            "comment": "Transparent wall",
+            "type": "mesh",
+            "path": "./Wall_reverse.obj",
+                "materialIndex": 5,
+                "midpoint": {
+                "x": -3,
+                "y": -3,
+                "z": -5
+            },
+                "height": 10,
+                "xrot": 0,
+                "yrot": 0,
+                "zrot": 90		    
+        },
+        {
+            "comment": "Specular ball",
+            "type": "mesh",
+            "path": "./sphere.obj",
+                "materialIndex": 2,
+                "midpoint": {
+                "x": 2,
+                "y": -2.25,
+                "z": 0
+            },
+                "height": 2,
+                "xrot": 0,
+                "yrot": 0,
+                "zrot": 0		    
+        },
+        {
+            "comment": "Diffuse ball 1",
+            "type": "mesh",
+            "path": "./sphere.obj",
+                "materialIndex": 3,
+                "midpoint": {
+                "x": 2,
+                "y": 0,
+                "z": 0
+            },
+                "height": 2,
+                "xrot": 0,
+                "yrot": 0,
+                "zrot": 0		    
+        },
+        {
+            "comment": "Diffuse ball 2",
+            "type": "mesh",
+            "path": "./sphere.obj",
+                "materialIndex": 4,
+                "midpoint": {
+                "x": 2,
+                "y": 2.25,
+                "z": 0
+            },
+                "height": 2,
+                "xrot": 0,
+                "yrot": 0,
+                "zrot": 0		    
+        }
+    ]
+}

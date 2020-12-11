@@ -8,17 +8,6 @@
 
 Vec3 MaterialTransparent::Reflect(Vec3 original_direction, Vec3 unit_normal){
 
-    //tarkista tuleeko säde sisältä vai ulkoa
-    //lasketaan tulokulma normaaliin nähden pistetulosta dot_product
-    //sisältä tullessa tarkistetaan kokonaisheijastumisen kulma sin(tulokulma) > 1/refraktiivinen indeksi 
-    //jos kokonaisheijastus, reflektoidaan kuten speculaari (1. return)
-    //Snellin laki antaa mahdollisen taittuneen kulman
-    //Fresnelin yhtälöistä rs ja rp -> heijastumisen prosenttiosuus F_r = (rs^2 + rp^2)/2
-    //heijastumisen todennäköisyys -> arvotaan taittuuko vai heijastuuko säde
-    //Jos heijastuu, reflektoidaan kuten speculaari (2. return)
-    //jos taittuu:
-    //ks uusi suunta = sin(lähtökulma)/sin(tulokulma)*(original_direction - dot_product*unit_normal) + dot_product*unit_normal
-
     float orig_dot_n = original_direction.DotProduct(unit_normal);
     float sin_orig = std::sqrt(1-std::pow(orig_dot_n,2));
     float ref_angle;

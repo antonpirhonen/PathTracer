@@ -1,0 +1,182 @@
+{
+	"camera": {
+		"focalPoint": {
+			"x": 0,
+			"y": -30,
+			"z": 0
+		},
+		"direction": {
+			"x": 0,
+			"y": 12,
+			"z": 0
+	}, 
+	"xAngle": 60,
+	"yAngle": 60,
+	"xReso": 100,
+	"yReso": 100
+},
+	"materials": [
+		{
+			"comment": "Light source",
+			"index": 0,
+			"type": "specular",
+			"color": {
+				"r": 1,
+				"g": 1,
+				"b": 1
+			},
+			"colorRem": {
+				"r": 1,
+				"g": 1,
+				"b": 1
+			},
+			"isLuminous": true
+		},
+		{
+			"comment": "Green diffuse",
+			"index": 1,
+			"type": "diffuse",
+			"mattness": 0.2,
+			"color": {
+				"r": 1,
+				"g": 0,
+				"b": 0
+			},
+			"colorRem": {
+				"r": 0,
+				"g": 0.4,
+				"b": 0
+			},
+			"isLuminous": false
+		},
+		{
+			"comment": "Transparent",
+			"index": 2,
+			"type": "transparent",
+			"refIndex": 0.6,
+			"color": {
+				"r": 1,
+				"g": 1,
+				"b": 1
+			},
+			"colorRem": {
+				"r": 1,
+				"g": 1,
+				"b": 1
+			},
+			"isLuminous": false
+		},
+		{
+			"comment": "Specular",
+			"index": 3,
+			"type": "specular",
+			"color": {
+				"r": 1,
+				"g": 1,
+				"b": 1
+			},
+			"colorRem": {
+				"r": 1,
+				"g": 1,
+				"b": 1
+			},
+			"isLuminous": false
+		},
+		{
+			"comment": "white diffuse",
+			"index": 4,
+			"type": "diffuse",
+			"mattness": 0.3,
+			"color": {
+				"r": 0.7,
+				"g": 0.7,
+				"b": 0.7
+			},
+			"colorRem": {
+				"r": 0.7,
+				"g": 0.7,
+				"b": 0.7
+			},
+			"isLuminous": false
+		}
+	],
+	"objects": [
+		{
+			"comment": "Big wall of light",
+			"type": "mesh",
+			"path": "./lights.obj",
+		        "materialIndex": 0,
+		        "midpoint": {
+			    "x": 0,
+			    "y": -35,
+			    "z": 0
+			},
+		        "height": 2000,
+		        "xrot": 0,
+		        "yrot": 0,
+		        "zrot": 90
+		    
+		},
+		{
+			"comment": "Bunny",
+			"type": "mesh",
+			"path": "./bunny2.obj",
+		        "materialIndex": 1,
+		        "midpoint": {
+			    "x": 0,
+			    "y": 10,
+			    "z": -13
+			},
+		        "height": 10,
+		        "xrot": 90,
+		        "yrot": 0,
+		        "zrot": 0		    
+		},
+		{
+			"comment": "box light",
+			"type": "mesh",
+			"path": "./Light.obj",
+		        "materialIndex": 0,
+		        "midpoint": {
+			    "x": 0,
+			    "y": 0,
+			    "z": 16
+			},
+		        "height": 1,
+		        "xrot": 90,
+		        "yrot": 0,
+		        "zrot": 0		    
+		},
+		{
+			"comment": "box ceiling floor and back",
+			"type": "mesh",
+			"path": "./walls.obj",
+		        "materialIndex": 4,
+		        "midpoint": {
+			    "x": 0,
+			    "y": 0,
+			    "z": 0
+			},
+		        "height": 35,
+		        "xrot": 90,
+		        "yrot": 0,
+		        "zrot": 0		    
+		},		
+		{
+			"comment": "box ceiling floor and back",
+			"type": "mesh",
+			"path": "./walls.obj",
+		        "materialIndex": 4,
+		        "midpoint": {
+			    "x": 0,
+			    "y": 0,
+			    "z": 0
+			},
+		        "height": 1000,
+		        "xrot": 0,
+		        "yrot": 0,
+		        "zrot": 270		    
+		}
+
+	]
+}

@@ -1,0 +1,165 @@
+{
+    "camera": {
+        "focalPoint": {
+            "x": -2,
+            "y": 3,
+            "z": -4.9
+        },
+        "direction": {
+            "x": 1,
+            "y": -0.8,
+            "z": 0.4
+        },
+        "xAngle": 40,
+        "yAngle": 40,
+        "xReso": 1000,
+        "yReso": 1000
+    },
+    "materials": [
+        {
+			"comment": "Light source",
+			"color": {
+				"r": 1,
+				"g": 1,
+				"b": 1
+			},
+			"isLuminous": true
+		},
+        {
+            "comment": "Diffuse walls",
+            "type": "diffuse",
+            "mattness": 0.3,
+            "color": {
+                "r": 0.7,
+                "g": 0.75,
+                "b": 0.8
+            },
+            "isLuminous": false
+        },
+        {
+            "comment": "Metallic",
+            "type": "specular",
+            "color": {
+                "r": 0.7,
+                "g": 0.7,
+                "b": 0.7
+            },
+            "isLuminous": false
+        },
+        {
+            "comment": "Yellow diffuse",
+            "type": "diffuse",
+            "mattness": 0.4,
+            "color": {
+                "r": 1,
+                "g": 0.91,
+                "b": 0
+            },
+            "isLuminous": false
+        },
+        {
+            "comment": "Red",
+            "type": "specular",
+            "color": {
+                "r": 1,
+                "g": 0.4,
+                "b": 0.4
+            },
+            "isLuminous": false
+        }
+    ],
+    "objects": [
+        {
+            "comment": "Background lights",
+            "type": "mesh",
+            "path": "./lights.obj",
+                "materialIndex": 0,
+                "midpoint": {
+                "x": -20,
+                "y": 0,
+                "z": 0
+            },
+                "height": 2000,
+                "xrot": 0,
+                "yrot": 0,
+                "zrot": 0
+            
+        },
+        {
+            "comment": "Walls",
+            "type": "mesh",
+            "path": "./walls.obj",
+                "materialIndex": 1,
+                "midpoint": {
+                "x": 5,
+                "y": 0,
+                "z": 0
+            },
+                "height": 10,
+                "xrot": 0,
+                "yrot": 0,
+                "zrot": 0		    
+        },
+        {
+			"comment": "box light",
+			"type": "mesh",
+			"path": "./Light.obj",
+		        "materialIndex": 0,
+		        "midpoint": {
+			    "x": 6,
+			    "y": 0,
+			    "z": 4.5
+			},
+		        "height": 0.5,
+		        "xrot": 90,
+		        "yrot": 0,
+		        "zrot": 0		    
+		},
+        {
+            "comment": "Specular ball",
+            "type": "mesh",
+            "path": "./sphere.obj",
+                "materialIndex": 2,
+                "midpoint": {
+                "x": 3,
+                "y": -2.25,
+                "z": -2.5
+            },
+                "height": 5,
+                "xrot": 0,
+                "yrot": 0,
+                "zrot": 0		    
+        },
+        {
+            "comment": "Green ball",
+            "type": "mesh",
+            "path": "./sphere.obj",
+                "materialIndex": 4,
+                "midpoint": {
+                "x": -3,
+                "y": -2.25,
+                "z": -3.5
+            },
+                "height": 3,
+                "xrot": 0,
+                "yrot": 0,
+                "zrot": 0		    
+        },
+        {
+            "comment": "Bunny",
+            "type": "mesh",
+            "path": "./bunny2.obj",
+                "materialIndex": 3,
+                "midpoint":{
+                    "x": 2,
+                    "y": 2,
+                    "z": -4
+                },
+                    "height": 3,
+                    "xrot": 90,
+                    "yrot": 0,
+                    "zrot": 90	
+        }
+       
+    ]
+}
