@@ -12,8 +12,8 @@
         },
         "xAngle": 40,
         "yAngle": 40,
-        "xReso": 100,
-        "yReso": 100
+        "xReso": 1000,
+        "yReso": 1000
     },
     "materials": [
         {
